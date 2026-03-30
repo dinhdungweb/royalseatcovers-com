@@ -1,0 +1,364 @@
+{% comment %}
+  Vehicle Finder Section - Metaobject Version (Customizable)
+{% endcomment %}
+
+{% assign years = shop.metaobjects.year.values %}
+{% assign makes = shop.metaobjects.make.values %}
+{% assign models = shop.metaobjects.model.values %}
+
+<section class="vehicle-finder" style="background: {{ section.settings.bg_color }};">
+  <div class="page-width">
+    <h2 class="finder-title" style="color: {{ section.settings.text_color }};">
+      {{ section.settings.heading }}
+    </h2>
+
+    <div class="finder-grid">
+      <!-- PRODUCT -->
+      <select id="vf-product">
+        <option value="">1 - Select Product</option>
+        {% for product in collections.all.products %}
+          <option value="{{ product.handle }}">
+             {{ product.title | truncate: 35 }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <!-- YEAR -->
+      <select id="vf-year">
+        <option value="">2 - Year</option>
+        {% paginate shop.metaobjects.year.values by 200 %}
+          {% assign years = shop.metaobjects.year.values | reverse %}
+          {% for year in years %}
+            <option value="{{ year.year }}">{{ year.year }}</option>
+          {% endfor %}
+        {% endpaginate %}
+      </select>
+
+      <!-- MAKE -->
+      <select id="vf-make">
+        <option value="">3 - Make</option>
+        {% paginate shop.metaobjects.make.values by 500 %}
+          {% for make in shop.metaobjects.make.values %}
+            <option value="{{ make.make }}">
+              {{ make.make }}
+            </option>
+          {% endfor %}
+        {% endpaginate %}
+      </select>
+
+      <!-- MODEL -->
+      <select id="vf-model" disabled>
+        <option value="">4 - Model</option>
+        {% paginate shop.metaobjects.model.values by 500 %}
+          {% for model in shop.metaobjects.model.values %}
+            <option
+              value="{{ model.model }}"
+              data-make="{{ model.make.value.make }}"
+            >
+              {{ model.model }}
+            </option>
+          {% endfor %}
+        {% endpaginate %}
+      </select>
+
+      <button
+        id="vf-go"
+        disabled
+        style="background: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};"
+      >
+        {{ section.settings.button_text }}
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+    .vehicle-finder {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .finder-title {
+      margin-bottom: 30px;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .finder-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:15px;
+      max-width:1000px;
+      margin:auto;
+    }
+
+    .vehicle-finder select{
+      width:100%;
+      padding:14px;
+      background:#222;
+      color:#fff;
+      border:1px solid #444;
+      border-radius:4px;
+
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    #vf-go{
+      width:100%;
+      padding:14px;
+      border:none;
+      cursor:pointer;
+      opacity:0.5;
+      border-radius:4px;
+      transition:0.3s ease;
+    }
+
+    #vf-go.enabled {
+      opacity: 1;
+    }
+
+    /* Tablet */
+  @media (max-width: 1024px) {
+    .vehicle-finder {
+      padding: 40px 20px;
+    }
+
+    .finder-title {
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+
+    .finder-grid {
+      flex-direction: column;
+      align-items: center;
+      max-width: 500px;
+      margin: 0 auto;
+      gap: 12px;
+    }
+
+    .vehicle-finder select {
+      width: 100%;
+      min-width: unset;
+      font-size: 15px;
+    }
+
+    #vf-go {
+      width: 100%;
+      padding: 16px;
+      font-size: 16px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .vehicle-finder {
+      padding: 30px 15px;
+    }
+
+    .finder-title {
+      font-size: 20px;
+    }
+
+    .vehicle-finder select {
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    #vf-go {
+      padding: 14px;
+      font-size: 15px;
+    }
+  }
+  {% comment %}luc update mobile {% endcomment %}
+  @media (max-width: 767px) {
+  .finder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  #vf-go {
+    grid-column: 1 / -1 !important; 
+    width: 100% !important; 
+    margin-top: 10px; 
+  }
+}
+</style>
+
+{% comment %} <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const product = document.getElementById('vf-product');
+    const year = document.getElementById('vf-year');
+    const make = document.getElementById('vf-make');
+    const model = document.getElementById('vf-model');
+    const btn = document.getElementById('vf-go');
+
+    const allModelOptions = Array.from(model.querySelectorAll("option:not([value=''])"));
+
+    function filterModels(selectedMake) {
+      if (!selectedMake) {
+        model.disabled = true;
+        model.value = '';
+        return;
+      }
+
+      model.disabled = false;
+
+      allModelOptions.forEach((option) => {
+        if (option.dataset.make === selectedMake) {
+          option.style.display = 'block';
+        } else {
+          option.style.display = 'none';
+        }
+      });
+
+      model.value = '';
+    }
+
+    function validate() {
+      if (product.value && year.value && make.value && model.value) {
+        btn.disabled = false;
+        btn.classList.add('enabled');
+      } else {
+        btn.disabled = true;
+        btn.classList.remove('enabled');
+      }
+    }
+
+    product.addEventListener('change', validate);
+    year.addEventListener('change', validate);
+    make.addEventListener('change', function () {
+      filterModels(this.value);
+      validate();
+    });
+    model.addEventListener('change', validate);
+
+    btn.addEventListener('click', function () {
+      const url = `/products/${product.value}?year=${encodeURIComponent(year.value)}&make=${encodeURIComponent(
+        make.value
+      )}&model=${encodeURIComponent(model.value)}`;
+      window.location.href = url;
+    });
+  });
+</script> {% endcomment %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const productSelect = document.getElementById('vf-product');
+    const yearSelect = document.getElementById('vf-year');
+    const makeSelect = document.getElementById('vf-make');
+    const modelSelect = document.getElementById('vf-model');
+    const btn = document.getElementById('vf-go');
+
+    // 1. Lưu bản gốc của tất cả các Model vào bộ nhớ JavaScript và xóa chúng khỏi DOM
+    const allModelOptions = Array.from(modelSelect.querySelectorAll("option:not([value=''])"));
+    modelSelect.innerHTML = '<option value="">4 - Model</option>';
+
+    function filterModels(selectedMake) {
+      // Xóa sạch danh sách hiện tại trong ô Model
+      modelSelect.innerHTML = '<option value="">4 - Model</option>';
+      
+      if (!selectedMake) {
+        modelSelect.disabled = true;
+        return;
+      }
+
+      // 2. Chỉ lọc và THÊM NHỮNG OPTION KHỚP vào lại thẻ Select
+      let hasValidModels = false;
+      allModelOptions.forEach((option) => {
+        if (option.dataset.make === selectedMake) {
+          // Clone (nhân bản) option để đưa vào lại thẻ select
+          modelSelect.appendChild(option.cloneNode(true));
+          hasValidModels = true;
+        }
+      });
+
+      modelSelect.disabled = !hasValidModels;
+      modelSelect.value = ''; // Reset về mặc định
+    }
+
+    function validate() {
+      // Kiểm tra tất cả các trường đã được chọn chưa
+      const isComplete = productSelect.value && yearSelect.value && makeSelect.value && modelSelect.value;
+      
+      if (isComplete) {
+        btn.disabled = false;
+        btn.classList.add('enabled');
+      } else {
+        btn.disabled = true;
+        btn.classList.remove('enabled');
+      }
+    }
+
+    // Lắng nghe sự kiện
+    productSelect.addEventListener('change', validate);
+    yearSelect.addEventListener('change', validate);
+    
+    makeSelect.addEventListener('change', function () {
+      filterModels(this.value);
+      validate();
+    });
+    
+    modelSelect.addEventListener('change', validate);
+
+    // Chuyển hướng khi nhấn nút GO
+    btn.addEventListener('click', function () {
+      if (btn.disabled) return;
+      
+      const url = `/products/${productSelect.value}?year=${encodeURIComponent(yearSelect.value)}&make=${encodeURIComponent(makeSelect.value)}&model=${encodeURIComponent(modelSelect.value)}`;
+      window.location.href = url;
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Vehicle Finder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SELECT YOUR VEHICLE"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Background Color",
+      "default": "#b22222"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "GO"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vehicle Finder"
+    }
+  ]
+}
+{% endschema %}

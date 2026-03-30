@@ -1,0 +1,367 @@
+{%- liquid
+  assign st = section.settings
+
+  assign container = section.settings.container
+  if container == 'w-full'
+    assign container = 'container-full'
+  endif
+-%}
+
+<section class="m-section faq-contact">
+  <div class="{{ container }}">
+    {% if st.faq_title != blank %}
+      <div class="faq-header">
+        <h2 class="faq-main-title">
+          {{ st.faq_title }}
+        </h2>
+
+        {% if st.faq_subtext != blank %}
+          <p class="faq-subtext">
+            {{ st.faq_subtext }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div class="faq-contact-grid">
+      <!-- FAQ LEFT -->
+      <div class="faq-column">
+        <div class="faq-list">
+          {% for block in section.blocks %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <div class="faq-question">
+                <span class="faq-text">
+                  {{ block.settings.question }}
+                </span>
+
+                <span class="faq-icon">+</span>
+              </div>
+
+              <div class="faq-answer">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- CONTACT RIGHT -->
+
+      <div class="contact-column">
+        <div class="contact-header">
+          <div class="contact-header-text">
+            {% if st.contact_title != blank %}
+              <h3 class="contact-title">
+                {{ st.contact_title }}
+              </h3>
+            {% endif %}
+
+            {% if st.contact_desc != blank %}
+              <div class="contact-desc rte">
+                {{ st.contact_desc }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if st.contact_avatar != blank %}
+            <div class="contact-avatar">
+              <img
+                src="{{ st.contact_avatar | image_url: width: 200 }}"
+                alt="Contact team"
+                loading="lazy"
+              >
+            </div>
+          {% endif %}
+        </div>
+
+        {%- form 'contact' -%}
+          <div class="form-fields">
+            {% if st.show_name %}
+              <input
+                type="text"
+                name="contact[name]"
+                placeholder="Name"
+              >
+            {% endif %}
+
+            <input
+              type="email"
+              required
+              name="contact[email]"
+              placeholder="Email"
+            >
+
+            {% if st.show_phone %}
+              <input
+                type="tel"
+                name="contact[phone]"
+                placeholder="Phone"
+              >
+            {% endif %}
+          </div>
+
+          <textarea
+            name="contact[body]"
+            rows="6"
+            placeholder="Message"
+          ></textarea>
+
+          <button type="submit" class="contact-btn">Send message</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+        .faq-header{
+    text-align:center;
+    margin-bottom:50px;
+    }
+
+    .faq-main-title{
+    font-size:36px;
+    font-weight:700;
+    margin-bottom:10px;
+    }
+
+    .faq-subtext{
+    font-size:14px;
+    color:#666;
+    }
+
+    .faq-subtext a{
+    text-decoration:underline;
+    font-weight:600;
+    }
+
+        .faq-contact-grid{
+      display:grid;
+      grid-template-columns:6fr 4fr;
+      gap:60px;
+      }
+
+      /* Tablet */
+      @media(max-width:1024px){
+
+      .faq-contact-grid{
+      grid-template-columns:7fr 3fr;
+      gap:40px;
+      }
+
+      }
+
+      /* Mobile */
+      @media(max-width:768px){
+
+      .faq-contact-grid{
+      grid-template-columns:1fr;
+      }
+
+      }
+
+        .faq-title{
+        font-size:32px;
+        margin-bottom:30px;
+        }
+
+        .faq-item{
+        border-bottom:1px solid #eee;
+        padding:18px 0;
+        }
+
+        .faq-question{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        cursor:pointer;
+        font-weight:600;
+        }
+
+        .faq-icon{
+        font-size:22px;
+        transition:0.3s;
+        }
+
+        .faq-answer{
+        display:none;
+        padding-top:15px;
+        color:#555;
+        }
+
+        .faq-item.is-open .faq-answer{
+        display:block;
+        }
+
+        .contact-column input,
+        .contact-column textarea{
+        width:100%;
+        padding:12px;
+        margin-bottom:12px;
+        border:1px solid #ddd;
+        border-radius:6px;
+        }
+
+        .contact-btn{
+        background:#000;
+        color:#fff;
+        padding:14px 28px;
+        border-radius:30px;
+        border:none;
+        cursor:pointer;
+        }
+
+        @media(max-width:768px){
+
+        .faq-contact-grid{
+        grid-template-columns:1fr;
+        }
+
+        }
+        .contact-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+  gap:20px;
+  }
+
+  .contact-title{
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:6px;
+  }
+
+  .contact-avatar img{
+  width:80px;
+  height:auto;
+  object-fit:contain;
+  }
+
+  .contact-desc{
+  font-size:14px;
+  color:#777;
+  }
+
+  @media(max-width:768px){
+
+  .contact-header{
+  flex-direction:column;
+  align-items:flex-start;
+  }
+
+  .contact-avatar img{
+  width:70px;
+  }
+
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach((item) => {
+    item.addEventListener('click', function () {
+      const parent = this.parentElement;
+
+      parent.classList.toggle('is-open');
+
+      const icon = this.querySelector('.faq-icon');
+
+      if (parent.classList.contains('is-open')) {
+        icon.textContent = 'x';
+      } else {
+        icon.textContent = '+';
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ + Contact",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "faq_subtext",
+      "label": "FAQ Sub text",
+      "default": "<p>Can't find what you're looking for? <a href=\"#\">Contact us</a>.</p>"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "container-fluid", "label": "Fluid" },
+        { "value": "w-full", "label": "Full width" }
+      ]
+    },
+
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "FAQ Title",
+      "default": "Frequently Asked Questions"
+    },
+
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact title",
+      "default": "Didn't find your answer?"
+    },
+
+    {
+      "type": "richtext",
+      "id": "contact_desc",
+      "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_avatar",
+      "label": "Contact Avatar"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_name",
+      "label": "Show name",
+      "default": true
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "Show phone",
+      "default": false
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "FAQ Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+
+  "max_blocks": 20,
+
+  "presets": [
+    {
+      "name": "FAQ + Contact"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+{% comment %}
+  Vehicle Selector Snippet (5 Levels)
+{% endcomment %}
+<div class="vehicle-selector">
+  <div class="vehicle-field">
+    <label>Year</label>
+    <select name="properties[Year]" id="vehicle-year" form="{{ product_form_id }}" required>
+      <option value="">Select Year</option>
+      {% paginate shop.metaobjects.year.values by 300 %}
+        {% assign years = shop.metaobjects.year.values | reverse %}
+        {% for year in years %}
+          <option value="{{ year.year }}">{{ year.year }}</option>
+        {% endfor %}
+      {% endpaginate %}
+    </select>
+  </div>
+
+  <div class="vehicle-field">
+    <label>Make</label>
+    <select name="properties[Make]" id="vehicle-make" form="{{ product_form_id }}" required disabled>
+      <option value="">Select Make</option>
+      {% paginate shop.metaobjects.make.values by 600 %}
+        {% for make in shop.metaobjects.make.values %}
+          <option value="{{ make.make }}">
+            {{ make.make }}
+          </option>
+        {% endfor %}
+      {% endpaginate %}
+    </select>
+  </div>
+
+  <div class="vehicle-field">
+    <label>Model</label>
+    <select name="properties[Model]" id="vehicle-model" form="{{ product_form_id }}" required disabled>
+      <option value="">Select Model</option>
+      {% paginate shop.metaobjects.model.values by 1200 %}
+        {% for model in shop.metaobjects.model.values %}
+          <option value="{{ model.model }}" data-make="{{ model.make.value.make }}">{{ model.model }}</option>
+        {% endfor %}
+      {% endpaginate %}
+    </select>
+  </div>
+
+  <div class="vehicle-field">
+    <label>Trim</label>
+    <select name="properties[Trim]" id="vehicle-trim" form="{{ product_form_id }}" required disabled>
+      <option value="">Select Trim</option>
+      {% paginate shop.metaobjects.trim.values by 2000 %}
+        {% for trim in shop.metaobjects.trim.values %}
+          <option value="{{ trim.trim }}" data-model="{{ trim.model.value.model }}">{{ trim.trim }}</option>
+        {% endfor %}
+      {% endpaginate %}
+    </select>
+  </div>
+
+  <div class="vehicle-field">
+    <label>Cab Size</label>
+    <select name="properties[Cab Size]" id="vehicle-cab" form="{{ product_form_id }}" required disabled>
+      <option value="">Select Cab Size</option>
+      {% paginate shop.metaobjects.cab.values by 2000 %}
+        {% for cab in shop.metaobjects.cab.values %}
+          <option value="{{ cab.cab }}" data-trim="{{ cab.trim.value.trim }}">{{ cab.cab }}</option>
+        {% endfor %}
+      {% endpaginate %}
+    </select>
+  </div>
+</div>

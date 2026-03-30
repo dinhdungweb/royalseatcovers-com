@@ -1,0 +1,732 @@
+{{ 'rich-text.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign animation_effect = settings.animations
+  assign animated = false
+  if animation_effect != 'none'
+    assign animated = true
+    if section.settings.animations != 'inherit'
+      assign animation_effect = section.settings.animations
+    endif
+  endif
+
+  assign show_image = false
+  if section.settings.image_1 != blank or section.settings.image_2 != blank or section.settings.image_3 != blank
+    assign show_image = true
+  endif
+%}
+
+{%- style -%}
+  #m-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  /* Alignment settings - đảm bảo override CSS external */
+  #m-section-{{ section.id }} .m-richtext__title {
+    text-align: {{ section.settings.heading_alignment }} !important;
+  }
+  #m-section-{{ section.id }} .m-richtext__description {
+    text-align: {{ section.settings.text_alignment }} !important;
+  }
+  #m-section-{{ section.id }} .m-richtext__button {
+    text-align: {{ section.settings.button_alignment }} !important;
+    {%- if section.settings.button_alignment == 'left' -%}
+      justify-content: flex-start !important;
+    {%- elsif section.settings.button_alignment == 'right' -%}
+      justify-content: flex-end !important;
+    {%- else -%}
+      justify-content: center !important;
+    {%- endif -%}
+  }
+ 
+.custom-rich-text-page-cover .m-richtext__title.h2 {
+    font-weight: bold !important;
+}
+.how-are-coverland .m-richtext__title.h2 {
+  font-weight: bold !important;
+}
+
+
+/* --- CSS Cập nhật cho Block Image & Video --- */
+.m-richtext__image-block,
+.m-richtext__video-block {
+  margin: 1.5rem 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Xử lý chiều cao (Section height) cho Image */
+.m-richtext__image-block.height-adapt {
+  aspect-ratio: var(--aspect-ratio-mobile);
+}
+@media (min-width: 768px) {
+  .m-richtext__image-block.height-adapt {
+    aspect-ratio: var(--aspect-ratio);
+  }
+}
+.m-richtext__image-block.height-small { height: 40vh; }
+.m-richtext__image-block.height-medium { height: 60vh; }
+.m-richtext__image-block.height-large { height: 80vh; }
+.m-richtext__image-block.height-fullscreen { height: 100vh; }
+
+.m-richtext__image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.m-image-block-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* CSS cho Video */
+.m-richtext__video-block video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Thêm transition nhẹ cho nút bấm khi di chuột */
+.m-button {
+  transition: opacity 0.3s ease;
+}
+.m-button:hover {
+  opacity: 0.85;
+}
+{%- endstyle -%}
+
+<section
+  id="m-section-{{ section.id }}"
+  class="m-section m-rich-text{% if show_image %} m-rich-text--show-images{% endif %} m-gradient m-color-{{ section.settings.color_scheme }} {{ section.settings.custom_class }}"
+>
+  <div class="{{ section.settings.container }} m-section-my m-section-py">
+    <div class="m-richtext">
+      {%- for block in section.blocks -%}
+        {% case block.type %}
+          {%- when 'video' -%}
+            <div
+              class="m-richtext__video-block {{ block.settings.container_type }}{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+              {% if animated %}
+                data-cascade
+                style="--animation-order: {{ forloop.index }};"
+              {% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.video != null -%}
+                {%- liquid 
+                  assign autoplay = block.settings.autoplay
+                  assign muted = false
+                  if autoplay
+                    assign muted = true
+                  endif
+                -%}
+                {{ block.settings.video | video_tag: autoplay: autoplay, loop: true, muted: muted, controls: true, class: 'm:w-full m:h-auto m:block' }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'm-placeholder-svg m:w-full m:h-full' }}
+              {%- endif -%}
+            </div>
+
+          {%- when 'image' -%}
+            {% liquid
+              assign image = block.settings.image
+              assign mb_image = block.settings.mb_image | default: image
+              assign image_link = block.settings.image_link
+              
+              assign aspect_ratio = image.aspect_ratio | default: 2.333
+              assign aspect_ratio_mobile = mb_image.aspect_ratio | default: 1
+              
+              assign style_attr = ''
+              if animated
+                assign style_attr = style_attr | append: '--animation-order: ' | append: forloop.index | append: ';'
+              endif
+              if block.settings.section_height == 'adapt'
+                assign style_attr = style_attr | append: '--aspect-ratio: ' | append: aspect_ratio | append: '; --aspect-ratio-mobile: ' | append: aspect_ratio_mobile | append: ';'
+              endif
+            %}
+
+            <div
+              class="m-richtext__image-block m-color-{{ block.settings.color_scheme }} {{ block.settings.container_type }} height-{{ block.settings.section_height }}{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+              {% if style_attr != blank %}style="{{ style_attr }}"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {% if image_link != blank %}<a href="{{ image_link }}" class="m-image-block-link">{% endif %}
+              
+              {% if image != blank or mb_image != blank %}
+                <picture class="media-wrapper m:block m:w-full m:h-full">
+                  {%- if block.settings.mb_image != blank -%}
+                    <source
+                      media="(max-width: 767px)"
+                      srcset="{{ block.settings.mb_image | image_url: width: '400x' }} 400w, {{ block.settings.mb_image | image_url: width: '600x' }} 600w, {{ block.settings.mb_image | image_url: width: '800x' }} 800w"
+                      width="{{ block.settings.mb_image.width }}"
+                      height="{{ block.settings.mb_image.height }}"
+                    >
+                  {%- endif %}
+                  {% liquid
+                    assign fallback_image = image | default: mb_image
+                    assign image_height = fallback_image.width | divided_by: fallback_image.aspect_ratio | round
+                  %}
+                  {{
+                    fallback_image
+                    | image_url: width: 3200
+                    | image_tag:
+                      loading: 'lazy',
+                      width: fallback_image.width,
+                      height: image_height,
+                      sizes: '100vw',
+                      widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200',
+                      alt: fallback_image.alt,
+                      class: 'm:w-full m:h-full m:object-cover'
+                  }}
+                </picture>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'm-placeholder-svg m:w-full m:h-full' }}
+              {% endif %}
+
+              {% if image_link != blank %}</a>{% endif %}
+            </div>
+
+          {%- when 'heading' -%}
+            {%- if block.settings.heading != blank -%}
+              {%- liquid
+                assign block_style = ''
+                if animated
+                  assign block_style = block_style | append: ' --animation-order: ' | append: forloop.index | append: ';'
+                endif
+              -%}
+<h2
+  class="m-richtext__title {{ block.settings.heading_size }} {% if animated %}m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+  style="text-align: {{ section.settings.heading_alignment }}; {% if block_style != blank %}{{ block_style }}{% endif %}"
+  {% if animated %}data-cascade{% endif %}
+  {{ block.shopify_attributes }}
+>
+                {{ block.settings.heading }}
+              </h2>
+            {% endif %}
+
+          {%- when 'subheading' -%}
+            {%- if block.settings.subheading != blank -%}
+              <p
+                class="m-richtext__subtitle{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+                {% if animated %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.subheading }}
+              </p>
+            {% endif %}
+
+          {%- when 'text' -%}
+            {%- if block.settings.text != blank -%}
+              {%- liquid
+                assign block_style = ''
+
+                if animated
+                  assign block_style = block_style | append: ' --animation-order: ' | append: forloop.index | append: ';'
+                endif
+              -%}
+              <div
+  class="m-richtext__description rte {% if animated %}m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+  style="text-align: {{ section.settings.text_alignment }}; {% if block_style != blank %}{{ block_style }}{% endif %}"
+  {% if animated %}data-cascade{% endif %}
+  {{ block.shopify_attributes }}
+>
+                {{ block.settings.text }}
+              </div>
+            {% endif %}
+
+          {%- when 'button' -%}
+            {%- if block.settings.button_label != blank -%}
+              {%- liquid
+                assign custom_btn_style = ''
+                if block.settings.btn_bg_color != blank and block.settings.btn_bg_color != 'rgba(0,0,0,0)'
+                  assign custom_btn_style = custom_btn_style | append: 'background-color: ' | append: block.settings.btn_bg_color | append: ' !important; border-color: ' | append: block.settings.btn_bg_color | append: ' !important;'
+                endif
+                if block.settings.btn_text_color != blank and block.settings.btn_text_color != 'rgba(0,0,0,0)'
+                  assign custom_btn_style = custom_btn_style | append: ' color: ' | append: block.settings.btn_text_color | append: ' !important;'
+                endif
+                
+                assign btn_justify = 'center'
+                if section.settings.button_alignment == 'left'
+                  assign btn_justify = 'flex-start'
+                elsif section.settings.button_alignment == 'right'
+                  assign btn_justify = 'flex-end'
+                endif
+              -%} 
+              <div 
+                class="m-richtext__button {% if animated %}m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+                style="text-align: {{ section.settings.button_alignment }}; display: flex; justify-content: {{ btn_justify }}; width: 100%; {% if animated %}--animation-order: {{ forloop.index }};{% endif %}"
+                {% if animated %}data-cascade{% endif %}
+              >
+                <a
+                  href="{{ block.settings.button_link }}"
+                  class="m-button {{ block.settings.button_style }} {{ block.settings.button_size }}"
+                  {% if custom_btn_style != blank %}style="{{ custom_btn_style }}"{% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  {{- block.settings.button_label -}}
+                </a>
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+  {% if show_image %}
+    <div class="m-rich-text__images">
+      <div class="{{ section.settings.container }} m-rich-text__images-container">
+        <div class="m-rich-text__images-wrapper">
+          {% if section.settings.image_1 != blank %}
+            <div class="m-rich-text__image m-rich-text__image-1">
+              {% render 'responsive-image', image: section.settings.image_1, section_index: section.index, index: 1 %}
+            </div>
+          {% endif %}
+          {% if section.settings.image_2 != blank %}
+            <div class="m-rich-text__image m-rich-text__image-2">
+              {% render 'responsive-image', image: section.settings.image_2, section_index: section.index, index: 1 %}
+            </div>
+          {% endif %}
+          {% if section.settings.image_3 != blank %}
+            <div class="m-rich-text__image m-rich-text__image-3">
+              {% render 'responsive-image', image: section.settings.image_3, section_index: section.index, index: 1 %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container type",
+      "default": "container",
+      "options": [
+        {
+          "value": "container-fluid",
+          "label": "Default"
+        },
+        {
+          "value": "container-full",
+          "label": "Full width"
+        },
+        {
+          "value": "container",
+          "label": "Use container box"
+        }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+{
+  "type": "select",
+  "id": "heading_alignment",
+  "label": "Heading alignment",
+  "default": "center",
+  "options": [
+    { "value": "left", "label": "Left" },
+    { "value": "center", "label": "Center" },
+    { "value": "right", "label": "Right" }
+  ]
+},
+{
+  "type": "select",
+  "id": "text_alignment",
+  "label": "Text alignment",
+  "default": "center",
+  "options": [
+    { "value": "left", "label": "Left" },
+    { "value": "center", "label": "Center" },
+    { "value": "right", "label": "Right" }
+  ]
+},
+{
+  "type": "select",
+  "id": "button_alignment",
+  "label": "Button alignment",
+  "default": "center",
+  "options": [
+    { "value": "left", "label": "Left" },
+    { "value": "center", "label": "Center" },
+    { "value": "right", "label": "Right" }
+  ]
+},
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "default": 52,
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "default": 52,
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Custom Attributes"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom classes"
+    },
+    {
+      "type": "header",
+      "content": "Animations"
+    },
+    {
+      "type": "select",
+      "id": "animations",
+      "label": "Visible in the view animation",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Inherit global setting"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade in"
+        },
+        {
+          "value": "fade-in-up",
+          "label": "Fade in up"
+        },
+        {
+          "value": "fade-in-left",
+          "label": "Fade in left"
+        },
+        {
+          "value": "fade-in-right",
+          "label": "Fade in right"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video Block",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay video",
+          "info": "Để video có thể tự động phát trên trình duyệt, video sẽ tự động bị tắt tiếng (muted).",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "container_type",
+          "label": "Container type",
+          "options": [
+            {
+              "value": "container-fluid",
+              "label": "Default"
+            },
+            {
+              "value": "container-full",
+              "label": "Full width"
+            },
+            {
+              "value": "container",
+              "label": "Use container box"
+            }
+          ],
+          "default": "container"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "mb_image",
+          "label": "Image (Mobile)"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link"
+        },
+        {
+          "type": "header",
+          "content": "General"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Color scheme",
+          "default": "scheme-3"
+        },
+        {
+          "type": "select",
+          "id": "container_type",
+          "label": "Container type",
+          "options": [
+            {
+              "value": "container-fluid",
+              "label": "Default"
+            },
+            {
+              "value": "container-full",
+              "label": "Full width"
+            },
+            {
+              "value": "container",
+              "label": "Use container box"
+            }
+          ],
+          "default": "container"
+        },
+        {
+          "type": "select",
+          "id": "section_height",
+          "label": "Image height",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "Adapt to image"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "fullscreen",
+              "label": "Full-screen"
+            }
+          ],
+          "default": "adapt"
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Subheading text"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Talk about your brand"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "default": "h2",
+          "options": [
+            {
+              "label": "Medium",
+              "value": "h3"
+            },
+            {
+              "label": "Large",
+              "value": "h2"
+            }
+          ]
+        }
+        
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post.<br> Add details on availability, style, or even provide a review.</p>"
+        }
+        
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Collection"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "m-button--primary",
+              "label": "Primary button"
+            },
+            {
+              "value": "m-button--secondary",
+              "label": "Secondary button"
+            },
+            {
+              "value": "m-button--white",
+              "label": "White button"
+            },
+            {
+              "value": "m-button--link",
+              "label": "Underline button"
+            }
+          ],
+          "default": "m-button--link"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "options": [
+            {
+              "value": "m-button--small",
+              "label": "Button small"
+            },
+            {
+              "value": "",
+              "label": "Button medium"
+            },
+            {
+              "value": "m-button--large",
+              "label": "Button large"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Custom Colors (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "btn_bg_color",
+          "label": "Button background color"
+        },
+        {
+          "type": "color",
+          "id": "btn_text_color",
+          "label": "Button text color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

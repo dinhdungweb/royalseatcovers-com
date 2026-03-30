@@ -1,0 +1,311 @@
+<section class="ccp-section" style="background: {{ section.settings.bg_color }};">
+  <div class="ccp-container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="ccp-title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <p class="ccp-description">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    <div class="ccp-list">
+      {%- for block in section.blocks -%}
+        <div class="ccp-item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <div class="ccp-icon-wrap">
+              <img
+                class="ccp-icon"
+                src="{{ block.settings.icon | image_url: width: 60 }}"
+                width="60"
+                height="60"
+                loading="lazy"
+                alt="{{ block.settings.header | escape }}"
+              >
+            </div>
+          {%- endif -%}
+
+          <div class="ccp-content">
+            <h3 class="ccp-header">{{ block.settings.header }}</h3>
+            <p class="ccp-text">{{ block.settings.description }}</p>
+
+            <div class="ccp-problem">
+              {%- if block.settings.challenge != blank -%}
+                <p>
+                  <strong style="color: {{ section.settings.challenge_color }}">Challenge: </strong>
+                  {{ block.settings.challenge | newline_to_br }}
+                </p>
+              {%- endif -%}
+
+              {%- if block.settings.result != blank -%}
+                <p>
+                  <strong style="color: {{ section.settings.result_color }}">Result: </strong>
+                  {{ block.settings.result | newline_to_br }}
+                </p>
+              {%- endif -%}
+
+              {%- if block.settings.solution != blank -%}
+                <p>
+                  <strong style="color: {{ section.settings.solution_color }}">Solution: </strong>
+                  {{ block.settings.solution | newline_to_br }}
+                </p>
+              {%- endif -%}
+
+              {%- if block.settings.solution_description != blank -%}
+                <p>
+                  {{ block.settings.solution_description | newline_to_br }}
+                </p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="ccp-button-wrap">
+        <a
+          href="{{ section.settings.button_link }}"
+          class="ccp-button"
+          style="background: {{ section.settings.button_bg }}; color: {{ section.settings.button_color }};"
+        >
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .ccp-section {
+    padding: 80px 20px;
+    color: #ffffff;
+  }
+
+  .ccp-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .ccp-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+
+  .ccp-description {
+    color: #cccccc;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-size: 18px;
+  }
+
+  .ccp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .ccp-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+  }
+
+  .ccp-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-top: 4px;
+  }
+
+  .ccp-header {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #ffffff;
+  }
+
+  .ccp-text {
+    color: #dddddd;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .ccp-problem p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #dddddd;
+  }
+
+  .ccp-problem strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .ccp-button-wrap {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .ccp-button {
+    padding: 16px 32px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+  }
+
+  .ccp-button:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .ccp-section {
+      padding: 50px 15px;
+    }
+
+    .ccp-item {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .ccp-title {
+      font-size: 26px;
+    }
+
+    .ccp-icon {
+      margin-bottom: 10px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Car Cover Problems",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "The Reality of Standard Car Covers"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "header",
+      "content": "Status Colors"
+    },
+    {
+      "type": "color",
+      "id": "challenge_color",
+      "label": "Challenge color",
+      "default": "#ff6b6b"
+    },
+    {
+      "type": "color",
+      "id": "result_color",
+      "label": "Result color",
+      "default": "#ffa94d"
+    },
+    {
+      "type": "color",
+      "id": "solution_color",
+      "label": "Solution color",
+      "default": "#51cf66"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "problem",
+      "name": "Problem item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Header",
+          "default": "Problem Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "textarea",
+          "id": "challenge",
+          "label": "Challenge text"
+        },
+        {
+          "type": "textarea",
+          "id": "result",
+          "label": "Result text"
+        },
+        {
+          "type": "textarea",
+          "id": "solution",
+          "label": "Solution text"
+        },
+        {
+          "type": "textarea",
+          "id": "solution_description",
+          "label": "Solution description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Car Cover Problems",
+      "blocks": [
+        {
+          "type": "problem"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

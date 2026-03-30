@@ -1,0 +1,388 @@
+<section
+  id="CustomTextIcon-{{ section.id }}"
+  class="custom-text-icon-section"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign alignment_class = 'justify-start'
+        if block.settings.alignment == 'center'
+          assign alignment_class = 'justify-center'
+        elsif block.settings.alignment == 'right'
+          assign alignment_class = 'justify-end'
+        endif
+
+        assign width_style = '100%'
+        if block.settings.width == 'fit-content'
+          assign width_style = 'max-content'
+        endif
+      -%}
+
+      <div
+        class="text-with-icon-block"
+        {{ block.shopify_attributes }}
+        style="margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px;"
+      >
+        <div
+          class="twi-container"
+          style="
+            display: flex;
+            flex-direction: {% if block.settings.direction == 'horizontal' %}row{% else %}column{% endif %};
+            gap: {{ block.settings.column_gap }}rem;
+            justify-content: {% if block.settings.alignment == 'center' %}center{% elsif block.settings.alignment == 'right' %}flex-end{% else %}flex-start{% endif %};
+            align-items: {% if block.settings.direction == 'horizontal' %}center{% else %}flex-start{% endif %};
+            width: {{ width_style }};
+            margin: 0 auto;
+            {% if block.settings.enable_bg %}
+              background-color: {{ block.settings.bg_color }};
+              border-radius: {{ block.settings.corner_radius }}%;
+              padding: {{ block.settings.padding }}rem;
+            {% endif %}
+            {% if block.settings.border_size > 0 %}
+              border: {{ block.settings.border_size }}px solid {{ block.settings.border_color }};
+            {% endif %}
+          "
+        >
+          {%- comment -%} Lặp qua 3 Text & Icon từ schema {%- endcomment -%}
+          {%- for i in (1..3) -%}
+            {%- capture text_key -%}text_{{ i }}{%- endcapture -%}
+            {%- capture icon_key -%}icon_{{ i }}{%- endcapture -%}
+            {%- capture custom_icon_key -%}custom_icon_{{ i }}{%- endcapture -%}
+
+            {%- assign text_val = block.settings[text_key] -%}
+            {%- assign icon_val = block.settings[icon_key] -%}
+            {%- assign custom_icon_val = block.settings[custom_icon_key] -%}
+
+            {%- if text_val != blank -%}
+              <div class="twi-item" style="display: flex; align-items: center; gap: 8px;">
+                {%- if custom_icon_val != blank -%}
+                  <img
+                    src="{{ custom_icon_val | image_url: width: 100 }}"
+                    alt="{{ custom_icon_val.alt | escape }}"
+                    loading="lazy"
+                    style="width: 1.5em; height: auto; transform: scale({{ block.settings.icon_scale | divided_by: 100.0 }});"
+                  >
+                {%- elsif icon_val != blank -%}
+                  <span
+                    class="material-icons"
+                    style="color: {{ block.settings.icon_color }}; transform: scale({{ block.settings.icon_scale | divided_by: 100.0 }});"
+                  >
+                    {{ icon_val }}
+                  </span>
+                {%- endif -%}
+
+                <span class="twi-text" style="color: {{ block.settings.text_color }};">
+                  {{ text_val }}
+                </span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- style -%}
+        #CustomTextIcon-{{ section.id }} .twi-text {
+          font-size: {{ block.settings.desktop_text_size }}px;
+        }
+        @media screen and (max-width: 749px) {
+          #CustomTextIcon-{{ section.id }} .twi-text {
+            font-size: {{ block.settings.mobile_text_size }}px;
+          }
+          #CustomTextIcon-{{ section.id }} .twi-container {
+            align-items: {% if block.settings.alignment == 'center' %}center{% elsif block.settings.alignment == 'right' %}flex-end{% else %}flex-start{% endif %} !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+          }
+        }
+      {%- endstyle -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text with icon",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text with icon",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_size",
+          "min": 8,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14,
+          "label": "Mobile text size"
+        },
+        {
+          "type": "range",
+          "id": "desktop_text_size",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 16,
+          "label": "Desktop text size"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "default": "#121212",
+          "label": "Text color"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_1",
+          "default": "Text with icon",
+          "label": "Text #1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_2",
+          "label": "Text #2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_3",
+          "label": "Text #3"
+        },
+        {
+          "type": "header",
+          "content": "Icons"
+        },
+        {
+          "type": "range",
+          "id": "icon_scale",
+          "min": 100,
+          "max": 200,
+          "step": 5,
+          "default": 120,
+          "unit": "%",
+          "label": "Icon scale",
+          "info": "Relative to text size"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "default": "#121212",
+          "label": "Icons color"
+        },
+        {
+          "type": "text",
+          "id": "icon_1",
+          "default": "check_circle",
+          "label": "Icon #1",
+          "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon_1",
+          "default": false,
+          "label": "Filled icon #1"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_1",
+          "label": "Custom icon #1"
+        },
+        {
+          "type": "text",
+          "id": "icon_2",
+          "default": "check_circle",
+          "label": "Icon #2"
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon_2",
+          "default": false,
+          "label": "Filled icon #2"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_2",
+          "label": "Custom icon #2"
+        },
+        {
+          "type": "text",
+          "id": "icon_3",
+          "default": "check_circle",
+          "label": "Icon #3"
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon_3",
+          "default": false,
+          "label": "Filled icon #3"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_3",
+          "label": "Custom icon #3"
+        },
+        {
+          "type": "header",
+          "content": "Container"
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "options": [
+            { "value": "fit-content", "label": "Fit text" },
+            { "value": "100%", "label": "Full" }
+          ],
+          "default": "100%",
+          "label": "Width"
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "options": [
+            { "value": "horizontal", "label": "Horizontal" },
+            { "value": "vertical", "label": "Vertical" }
+          ],
+          "default": "horizontal",
+          "label": "Stacking direction",
+          "info": "Applied when multiple texts are added."
+        },
+        {
+          "type": "range",
+          "id": "column_gap",
+          "min": 0,
+          "max": 6,
+          "step": 0.5,
+          "label": "Stacking spacing",
+          "default": 3
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_bg",
+          "default": false,
+          "label": "Enable background"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#F3F3F3"
+        },
+        {
+          "type": "range",
+          "id": "corner_radius",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Corner Radius",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "min": 1,
+          "max": 5,
+          "step": 0.5,
+          "label": "Padding",
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "border_size",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Border thickness",
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border color",
+          "default": "#B7B7B7"
+        },
+        {
+          "type": "header",
+          "content": "Block margin"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 30,
+          "step": 3,
+          "unit": "px",
+          "label": "Top margin",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 30,
+          "step": 3,
+          "unit": "px",
+          "label": "Bottom margin",
+          "default": 15
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with icon",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

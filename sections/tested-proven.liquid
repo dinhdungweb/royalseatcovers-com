@@ -1,0 +1,386 @@
+<style>
+  .tested-proven-{{ section.id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+    font-family: inherit;
+  }
+  .tp-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: start;
+  }
+  
+  /* Cột 1: Thông tin và chứng nhận */
+  .tp-info-col {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tp-logo-text {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #111;
+  }
+  .tp-main-title {
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+    color: #111;
+  }
+  .tp-subtitle {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  .tp-docs-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    display: block;
+  }
+  .tp-download-btn {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease;
+  }
+  .tp-download-btn:hover {
+    background-color: #333;
+  }
+
+  /* Cột 2 & 3: Thẻ Video và thông số */
+  .tp-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .tp-card-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    color: #111;
+  }
+  .tp-card-media-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #f4f4f4;
+    overflow: hidden;
+  }
+  .tp-card-media-wrapper video,
+  .tp-card-media-wrapper img,
+  .tp-card-media-wrapper svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tp-stats-box {
+    background-color: #1a1a1a;
+    padding: 25px 20px;
+    color: #fff;
+  }
+  .tp-stat-row {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+  }
+  .tp-stat-row:last-child {
+    margin-bottom: 0;
+  }
+  .tp-brand-col {
+    width: 100px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 4px; 
+  }
+  .tp-brand-col svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+  .tp-brand-col.others {
+    color: #999;
+    font-weight: 400;
+  }
+  .tp-metrics-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .tp-stat-value {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .tp-stat-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: #333;
+  }
+  .tp-stat-bar-fill {
+    height: 100%;
+  }
+
+  /* Responsive Mobile */
+  @media (max-width: 900px) {
+    .tp-grid-{{ section.id }} {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .tp-main-title {
+      font-size: 28px;
+    }
+  }
+</style>
+
+<div class="tested-proven-{{ section.id }}">
+  <div class="tp-grid-{{ section.id }}">
+    
+    <div class="tp-info-col">
+      <div class="tp-logo-text">{{ section.settings.logo_text }}</div>
+      <h2 class="tp-main-title">{{ section.settings.main_title }}</h2>
+      <p class="tp-subtitle">{{ section.settings.subtitle }}</p>
+      
+      {% if section.settings.docs_image != blank %}
+        <img class="tp-docs-img" src="{{ section.settings.docs_image | image_url: width: 600 }}" alt="Test Reports" loading="lazy">
+      {% else %}
+        {{ 'document' | placeholder_svg_tag: 'tp-docs-img' }}
+      {% endif %}
+      
+      {% if section.settings.btn_link != blank and section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_link }}" class="tp-download-btn">{{ section.settings.btn_text }}</a>
+      {% endif %}
+    </div>
+
+    {% for block in section.blocks %}
+      <div class="tp-card" {{ block.shopify_attributes }}>
+        <h3 class="tp-card-title">{{ block.settings.card_title }}</h3>
+        
+        <div class="tp-card-media-wrapper">
+          {% if block.settings.card_video != blank %}
+            {{ block.settings.card_video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+        
+        <div class="tp-stats-box">
+          <div class="tp-stat-row">
+            <div class="tp-brand-col">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              {{ block.settings.brand_name }}
+            </div>
+            <div class="tp-metrics-col">
+              <div class="tp-stat-value" style="color: {{ block.settings.brand_color }};">{{ block.settings.brand_value }}</div>
+              <div class="tp-stat-bar-bg">
+                <div class="tp-stat-bar-fill" style="width: {{ block.settings.brand_bar_width }}%; background-color: {{ block.settings.brand_color }};"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tp-stat-row">
+            <div class="tp-brand-col others">{{ block.settings.others_name }}</div>
+            <div class="tp-metrics-col">
+              <div class="tp-stat-value" style="color: {{ block.settings.others_color }};">{{ block.settings.others_value }}</div>
+              <div class="tp-stat-bar-bg">
+                <div class="tp-stat-bar-fill" style="width: {{ block.settings.others_bar_width }}%; background-color: {{ block.settings.others_color }};"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tested & Proven",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Top Brand/Logo Text",
+      "default": "Intertek®"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Heading",
+      "default": "Tested & Proven"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Verified waterproof and UV performance"
+    },
+    {
+      "type": "image_picker",
+      "id": "docs_image",
+      "label": "Documents Image"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "DOWNLOAD TEST RESULTS"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "test_card",
+      "name": "Test Metric Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card Heading",
+          "default": "Waterproof. Tested to the Limit."
+        },
+        {
+          "type": "video",
+          "id": "card_video",
+          "label": "Card Video (MP4)"
+        },
+        {
+          "type": "header",
+          "content": "Your Brand Settings"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "default": "Coverland"
+        },
+        {
+          "type": "text",
+          "id": "brand_value",
+          "label": "Brand Stat Value",
+          "default": "10190mmH2O"
+        },
+        {
+          "type": "color",
+          "id": "brand_color",
+          "label": "Brand Stat Color",
+          "default": "#a1e5ff"
+        },
+        {
+          "type": "range",
+          "id": "brand_bar_width",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Brand Bar Fill (%)",
+          "default": 90
+        },
+        {
+          "type": "header",
+          "content": "Competitor (Others) Settings"
+        },
+        {
+          "type": "text",
+          "id": "others_name",
+          "label": "Competitor Name",
+          "default": "Others"
+        },
+        {
+          "type": "text",
+          "id": "others_value",
+          "label": "Competitor Stat Value",
+          "default": "1~3000mmH2O"
+        },
+        {
+          "type": "color",
+          "id": "others_color",
+          "label": "Competitor Stat Color",
+          "default": "#2b4065"
+        },
+        {
+          "type": "range",
+          "id": "others_bar_width",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Competitor Bar Fill (%)",
+          "default": 30
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tested & Proven",
+      "blocks": [
+        {
+          "type": "test_card",
+          "settings": {
+            "card_title": "Waterproof. Tested to the Limit.",
+            "brand_value": "10190mmH2O",
+            "brand_color": "#a1e5ff",
+            "brand_bar_width": 90,
+            "others_value": "1~3000mmH2O",
+            "others_color": "#2b4065",
+            "others_bar_width": 30
+          }
+        },
+        {
+          "type": "test_card",
+          "settings": {
+            "card_title": "Blocks What Damages Your Paint",
+            "brand_value": "99.96%",
+            "brand_color": "#ff4d4d",
+            "brand_bar_width": 95,
+            "others_value": "30-70%",
+            "others_color": "#7a2a35",
+            "others_bar_width": 45
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

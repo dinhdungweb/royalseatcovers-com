@@ -1,0 +1,126 @@
+<section class="product-showcase-video">
+  <div class="showcase-wrapper">
+    {% if section.settings.heading != blank %}
+      <h2 class="showcase-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="showcase-content">
+      <div class="video-container">
+        {% if section.settings.video_file != blank %}
+          <video 
+            class="showcase-video" 
+            autoplay 
+            muted 
+            loop 
+            playsinline>
+            {% for source in section.settings.video_file.sources %}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {% endfor %}
+            Trình duyệt của bạn không hỗ trợ thẻ video.
+          </video>
+        {% else %}
+          <div class="video-placeholder">
+            <p>Selecione um vídeo</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-showcase-video {
+    width: 100%;
+    padding: 40px 0;
+  }
+
+  .showcase-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .showcase-heading {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 30px 0;
+    color: #000;
+  }
+
+  .showcase-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .video-container {
+    position: relative;
+    width: 50%;
+    padding-bottom: 28.125%; /* 16:9 aspect ratio */
+    overflow: hidden;
+    background: #000;
+    border-radius: 4px;
+  }
+
+  .showcase-video,
+  .video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    color: #ccc;
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .showcase-heading {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .video-container {
+      width: 100%;
+      padding-bottom: 56.25%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .showcase-heading {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Showcase Video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Showcase"
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Vídeo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Showcase Video"
+    }
+  ]
+}
+{% endschema %}

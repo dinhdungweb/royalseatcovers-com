@@ -1,0 +1,123 @@
+{% comment %}
+  Independent Setup Picker Snippet
+  Handles Detailed Card selection with Price, Savings, and Badges
+{% endcomment %}
+
+{% liquid
+  assign setup_option = null
+  for option in product.options_with_values
+    assign option_name = option.name | downcase
+    if option_name == 'setup' or option_name == 'set' or option_name == 'coverage'
+      assign setup_option = option
+      break
+    endif
+  endfor
+%}
+
+{% if setup_option %}
+  <div class="product-setup-picker" data-option-index="{{ setup_option.position | minus: 1 }}">
+    <div class="setup-options">
+      {% for value in setup_option.values %}
+        {% liquid
+          assign input_id = 'setup-' | append: section.id | append: '-' | append: forloop.index0
+          assign current_variant = product.selected_or_first_available_variant
+          
+          # Find variant with this setup and current other options
+          assign variant_with_this_setup = null
+          for variant in product.variants
+            assign match = true
+            for option in product.options_with_values
+              if option.name == setup_option.name
+                if variant.options[forloop.index0] != value
+                  assign match = false
+                  break
+                endif
+              else
+                # Keep other options the same as selected
+                if variant.options[forloop.index0] != option.selected_value
+                  assign match = false
+                  break
+                endif
+              endif
+            endfor
+            
+            if match
+              assign variant_with_this_setup = variant
+              break
+            endif
+          endfor
+          
+          # If no direct match, fallback to first variant with this setup
+          if variant_with_this_setup == null
+             for variant in product.variants
+               if variant.options[setup_option.position | minus: 1] == value
+                 assign variant_with_this_setup = variant
+                 break
+               endif
+             endfor
+          endif
+
+          assign price = variant_with_this_setup.price
+          assign compare_at_price = variant_with_this_setup.compare_at_price
+          assign savings = compare_at_price | minus: price
+        %}
+        
+        <label class="setup-card {% if setup_option.selected_value == value %}selected{% endif %}" for="{{ input_id }}">
+          <div class="setup-card--radio">
+            <input 
+              type="radio" 
+              id="{{ input_id }}" 
+              name="options[{{ setup_option.name | escape }}]" 
+              value="{{ value | escape }}"
+              form="{{ product_form_id }}"
+              class="m-product-option__input"
+              data-option-value-id="{{ value.id }}"
+              {% if setup_option.selected_value == value %}checked{% endif %}
+            >
+            <span class="custom-radio"></span>
+          </div>
+          
+          <div class="setup-card--content">
+             <div class="setup-card--header">
+                <span class="setup-badge">Lucky Ride Deal 🍀</span>
+                <span class="setup-name">{{ value }}</span>
+             </div>
+             
+             <div class="setup-card--pricing">
+                <div class="price-labels">
+                   <span class="label-special">YOUR SPECIAL PRICE</span>
+                   <span class="label-save">Save {{ savings | money }} Today!</span>
+                </div>
+                <div class="price-values">
+                   {% if compare_at_price > price %}
+                    <span class="price-compare">{{ compare_at_price | money }}</span>
+                   {% endif %}
+                   <span class="price-current">{{ price | money }}</span>
+                </div>
+             </div>
+          </div>
+
+          {% if value contains 'Front & Rear' %}
+            <div class="best-value-tag">🏆 Best Value</div>
+          {% endif %}
+        </label>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const setupCards = document.querySelectorAll('.setup-card');
+    
+    setupCards.forEach(card => {
+      const input = card.querySelector('input');
+      input.addEventListener('change', function() {
+        if (this.checked) {
+          setupCards.forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+        }
+      });
+    });
+  });
+</script>

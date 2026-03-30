@@ -1,0 +1,219 @@
+<style>
+  /* Cấu hình thanh tabs dính trên màn hình */
+  .anchor-tabs-wrapper-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .anchor-tabs-container-{{ section.id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: {{ section.settings.tab_spacing }}px; /* Thuộc tính điều chỉnh khoảng cách */
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 20px; /* Thêm padding 2 bên để không bị sát lề khi cuộn trên mobile */
+  }
+
+  /* Ẩn thanh cuộn ngang trên Chrome/Safari */
+  .anchor-tabs-container-{{ section.id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .anchor-tab-link {
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    padding: 16px 10px; /* Đã giảm padding ngang để nhường chỗ cho thuộc tính gap */
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .anchor-tab-link:hover,
+  .anchor-tab-link.active {
+    color: {{ section.settings.active_text_color }};
+    border-bottom-color: {{ section.settings.active_line_color }};
+  }
+
+  /* Responsive cho Mobile */
+  @media (max-width: 768px) {
+    .anchor-tabs-container-{{ section.id }} {
+      justify-content: flex-start;
+      gap: {{ section.settings.tab_spacing_mobile }}px; /* Khoảng cách riêng cho mobile */
+    }
+    .anchor-tab-link {
+      padding: 14px 5px;
+      font-size: 15px;
+    }
+  }
+</style>
+
+<div class="anchor-tabs-wrapper-{{ section.id }}">
+  <div class="anchor-tabs-container-{{ section.id }}">
+    {% for block in section.blocks %}
+      {% if block.settings.tab_name != blank and block.settings.target_id != blank %}
+        <a href="{{ block.settings.target_id }}" class="anchor-tab-link {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+          {{ block.settings.tab_name }}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabLinks = document.querySelectorAll('.anchor-tabs-container-{{ section.id }} .anchor-tab-link');
+    
+    tabLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        
+        if (targetId.startsWith('#') && targetId.length > 1) {
+          e.preventDefault();
+          const targetSection = document.querySelector(targetId);
+          
+          if (targetSection) {
+            tabLinks.forEach(item => item.classList.remove('active'));
+            this.classList.add('active');
+            
+            const tabHeight = document.querySelector('.anchor-tabs-wrapper-{{ section.id }}').offsetHeight;
+            const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - tabHeight - 20;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Navigation Tabs (Anchor)",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#aaaaaa"
+    },
+    {
+      "type": "color",
+      "id": "active_text_color",
+      "label": "Active Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "active_line_color",
+      "label": "Active Underline Color",
+      "default": "#e32626"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "tab_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between tabs (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "tab_spacing_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between tabs (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_name",
+          "label": "Tab Name",
+          "default": "Details"
+        },
+        {
+          "type": "text",
+          "id": "target_id",
+          "label": "Target Section ID",
+          "info": "Include the # symbol (e.g., #details, #reviews).",
+          "default": "#details"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Navigation Tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Details",
+            "target_id": "#details"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Reviews",
+            "target_id": "#reviews"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Q&A",
+            "target_id": "#qa"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Shipping",
+            "target_id": "#shipping"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Warranty",
+            "target_id": "#warranty"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

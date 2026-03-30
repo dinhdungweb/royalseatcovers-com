@@ -1,0 +1,357 @@
+<style>
+  .shipping-section-wrapper-{{ section.id }} {
+    font-family: inherit;
+    color: #333;
+    padding-bottom: 40px;
+  }
+
+  /* Khung bao ngoài */
+  .global-shipping-main {
+    width: 100%;
+  }
+
+  /* Banner (Thanh tiêu đề click được) */
+  .global-shipping-summary-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .global-shipping-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1;
+    pointer-events: none; /* Để không chặn thao tác click */
+  }
+
+  .global-shipping-title {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* Nút mũi tên bên phải */
+  .global-shipping-icon-wrapper {
+    position: absolute;
+    right: 40px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  .global-shipping-summary-{{ section.id }}:hover .global-shipping-icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  .global-shipping-icon {
+    width: 16px;
+    height: 16px;
+    fill: #111;
+    transition: transform 0.4s ease;
+  }
+
+  /* Hiệu ứng xoay mũi tên khi mở */
+  .global-shipping-main.is-active .global-shipping-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Phần nội dung xổ xuống */
+  .global-shipping-content-wrapper {
+    display: none; /* Ẩn mặc định */
+    background: #fff;
+    padding: 50px 20px;
+    animation: slideDown 0.4s ease-out forwards;
+  }
+  
+  /* Hiển thị khi có class is-active */
+  .global-shipping-main.is-active .global-shipping-content-wrapper {
+    display: block;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .global-shipping-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Style cho từng mục Policy */
+  .sp-policy-block {
+    margin-bottom: 30px;
+  }
+  .sp-policy-block h3 {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0 0 15px 0;
+  }
+  .sp-policy-block .sp-policy-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+  }
+  .sp-policy-block .sp-policy-text p {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  /* Khung Assistance Box */
+  .assistance-box-{{ section.id }} {
+    margin-top: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+  }
+  .assist-left h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #111;
+  }
+  .assist-left p {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  .assist-left small {
+    font-size: 12px;
+    font-style: italic;
+    color: #666;
+  }
+  .assist-right {
+    text-align: center;
+    min-width: 150px;
+    border-left: 1px solid #eee;
+    padding-left: 20px;
+  }
+  .assist-right-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #ba2828;
+    color: #fff;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  .assist-right-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+  .assist-right-title {
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .assist-right-phone {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid #ba2828;
+    color: #ba2828;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .global-shipping-title { font-size: 28px; }
+    .global-shipping-icon-wrapper { right: 20px; width: 32px; height: 32px; }
+    .assistance-box-{{ section.id }} { flex-direction: column; text-align: center; }
+    .assist-right { border-left: none; border-top: 1px solid #eee; padding-left: 0; padding-top: 20px; margin-top: 20px; }
+  }
+</style>
+
+<div class="shipping-section-wrapper-{{ section.id }}">
+  <div class="global-shipping-main" id="ShippingBlock-{{ section.id }}">
+    
+    <div class="global-shipping-summary-{{ section.id }}" onclick="toggleShippingDropdown('{{ section.id }}')"
+      {% if section.settings.banner_image != blank %}
+        style="background-image: url('{{ section.settings.banner_image | image_url: width: 1600 }}');"
+      {% endif %}>
+      <div class="global-shipping-overlay"></div>
+      <h2 class="global-shipping-title">{{ section.settings.banner_title }}</h2>
+      <div class="global-shipping-icon-wrapper">
+        <svg class="global-shipping-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+      </div>
+    </div>
+
+    <div class="global-shipping-content-wrapper">
+      <div class="global-shipping-inner">
+        
+        {% for block in section.blocks %}
+          <div class="sp-policy-block" {{ block.shopify_attributes }}>
+            {% if block.settings.title != blank %}
+              <h3>{{ block.settings.title }}</h3>
+            {% endif %}
+            <div class="sp-policy-text">
+              {{ block.settings.content }}
+            </div>
+          </div>
+        {% endfor %}
+
+        {% if section.settings.show_assistance %}
+          <div class="assistance-box-{{ section.id }}">
+            <div class="assist-left">
+              <h3>{{ section.settings.assist_heading }}</h3>
+              <p>{{ section.settings.assist_subheading }}</p>
+              <small>{{ section.settings.assist_note }}</small>
+            </div>
+            <div class="assist-right">
+              <div class="assist-right-icon">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              </div>
+              <span class="assist-right-title">Call Us</span>
+              <a href="tel:{{ section.settings.phone_number | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" class="assist-right-phone">
+                {{ section.settings.phone_number }}
+              </a>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleShippingDropdown(sectionId) {
+    var block = document.getElementById('ShippingBlock-' + sectionId);
+    if(block) {
+      block.classList.toggle('is-active');
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Shipping Policy Dropdown",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Settings"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Heading",
+      "default": "Shipping Policy"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "header",
+      "content": "Assistance Box"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_assistance",
+      "label": "Show Assistance Box",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "assist_heading",
+      "label": "Heading",
+      "default": "Need Further Assistance?"
+    },
+    {
+      "type": "text",
+      "id": "assist_subheading",
+      "label": "Subheading",
+      "default": "Contact one of our Product Specialists Today!"
+    },
+    {
+      "type": "text",
+      "id": "assist_note",
+      "label": "Working Hours Note",
+      "default": "Our customer support services are available 7 days a week 9:00 AM to 5:30 PM PST."
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "(800) 799-5165"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "policy_text",
+      "name": "Text Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading (Optional)",
+          "default": "FREE SHIPPING"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>We make shipping simple! All items are shipped from our warehouse. Orders placed before 11am PT will ship on the same day.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shipping Policy",
+      "blocks": [
+        {
+          "type": "policy_text",
+          "settings": {
+            "title": "FREE SHIPPING",
+            "content": "<p>We make shipping simple! All items on Coverland.com are shipped from our warehouse in California. Orders placed before 11am PT will ship on the same day, from Tuesday-Saturday. Weekend orders placed after 11am PT on Saturday will ship on Monday. Orders placed on Monday will ship on Tuesday.</p><p>Once shipped, packages will normally be delivered within 1-5 business days based on your location.</p><p>We primarily ship with FedEx/UPS for fast, reliable service. In some cases, USPS may be used for certain U.S. destinations.</p><p>Orders of $75 or more going to the Contiguous United States ship free. For orders under $75, shipping rates are based on your destination zip code and city, and are calculated at checkout.</p>"
+          }
+        },
+        {
+          "type": "policy_text",
+          "settings": {
+            "title": "International Shipping",
+            "content": "<p>We are currently offering international orders for Canada only.</p>"
+          }
+        },
+        {
+          "type": "policy_text",
+          "settings": {
+            "title": "AK, HI, PR, VI, Guam, APO & FPO Addresses",
+            "content": "<p>Unfortunately, free shipping does not apply to Alaska, Hawaii, Puerto Rico, Virgin Islands, Guam, APO, or FPO addresses. Rates for these locations will be shown at checkout.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,616 @@
+<section class="why-coverland" style="background: {{ section.settings.bg_color }}; --icon-size: {{ section.settings.icon_size }}px;">
+  
+  <div class="why-content-width why-section-header">
+    {% if section.settings.title != blank %}
+      <h2 class="why-title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <p class="why-description">
+        {{ section.settings.description }}
+      </p>
+    {% endif %}
+  </div>
+
+  {%- assign in_feature_list = false -%}
+  {%- assign in_button_list = false -%}
+
+  {% for block in section.blocks %}
+    
+    {%- comment -%} Xử lý đóng/mở thẻ bọc cho danh sách Feature {%- endcomment -%}
+    {% if block.type == 'feature' %}
+      {% if in_feature_list == false %}
+        <div class="why-content-width why-list">
+        {%- assign in_feature_list = true -%}
+      {% endif %}
+    {% else %}
+      {% if in_feature_list == true %}
+        </div>
+        {%- assign in_feature_list = false -%}
+      {% endif %}
+    {% endif %}
+
+    {%- comment -%} Xử lý đóng/mở thẻ bọc cho danh sách Button {%- endcomment -%}
+    {% if block.type == 'button' %}
+      {% if in_button_list == false %}
+        <div class="why-content-width why-block-actions">
+        {%- assign in_button_list = true -%}
+      {% endif %}
+    {% else %}
+      {% if in_button_list == true %}
+        </div>
+        {%- assign in_button_list = false -%}
+      {% endif %}
+    {% endif %}
+
+    {%- comment -%} BẮT ĐẦU RENDER THEO TỪNG TYPE {%- endcomment -%}
+    {% case block.type %}
+      
+      {% when 'heading' %}
+        {% if block.settings.text != blank %}
+          <div class="why-content-width" {{ block.shopify_attributes }}>
+            <{{ block.settings.heading_tag }} 
+              class="why-block-heading" 
+              style="
+                text-align: {{ block.settings.alignment }}; 
+                color: {{ block.settings.color }}; 
+                font-size: {{ block.settings.font_size }}px; 
+                margin-bottom: {{ block.settings.margin_bottom }}px;
+              " 
+            >
+              {{ block.settings.text }}
+            </{{ block.settings.heading_tag }}>
+          </div>
+        {% endif %}
+
+      {% when 'text' %}
+        {% if block.settings.text != blank %}
+          <div class="why-content-width why-block-text" 
+               style="
+                 text-align: {{ block.settings.alignment }}; 
+                 color: {{ block.settings.color }}; 
+                 font-size: {{ block.settings.font_size }}px; 
+                 margin-bottom: {{ block.settings.margin_bottom }}px;
+               " 
+               {{ block.shopify_attributes }}
+          >
+            {{ block.settings.text }}
+          </div>
+        {% endif %}
+
+      {% when 'feature' %}
+        <div class="why-item" {{ block.shopify_attributes }}>
+          <div class="why-icon">
+            {% if block.settings.icon != blank %}
+              {%- assign img_width = section.settings.icon_size | times: 2 -%}
+              <img
+                src="{{ block.settings.icon | image_url: width: img_width }}"
+                width="{{ section.settings.icon_size }}"
+                height="{{ section.settings.icon_size }}"
+                loading="lazy"
+                alt="{{ block.settings.title | escape }}"
+              >
+            {% else %}
+              ✓
+            {% endif %}
+          </div>
+          <div class="why-content">
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </div>
+
+      {% when 'button' %}
+        {% if block.settings.button_text != blank %}
+          <a href="{{ block.settings.button_link }}" 
+             class="why-btn why-btn--{{ block.settings.button_style }}" 
+             style="--btn-bg: {{ block.settings.bg_color }}; --btn-text: {{ block.settings.text_color }};"
+             {{ block.shopify_attributes }}>
+            {{ block.settings.button_text }}
+          </a>
+        {% endif %}
+
+      {% when 'image' %}
+        <div class="why-image-wrapper why-image--{{ block.settings.container_type }}" {{ block.shopify_attributes }}>
+          {% if block.settings.image_link != blank %}
+            <a href="{{ block.settings.image_link }}">
+          {% endif %}
+
+          {% if block.settings.image != blank %}
+            <img 
+              src="{{ block.settings.image | image_url: width: 2000 }}" 
+              alt="{{ block.settings.image.alt | escape }}" 
+              loading="lazy"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          {% if block.settings.image_link != blank %}
+            </a>
+          {% endif %}
+        </div>
+        
+    {% endcase %}
+  {% endfor %}
+
+  {%- comment -%} Bắt lỗi đóng thẻ nếu block cuối cùng là feature hoặc button {%- endcomment -%}
+  {% if in_feature_list == true %}</div>{% endif %}
+  {% if in_button_list == true %}</div>{% endif %}
+
+  {% if section.settings.button_text != blank %}
+    <div class="why-content-width why-button">
+      <a href="{{ section.settings.button_link }}" class="btn-section">
+        {{ section.settings.button_text }}
+      </a>
+    </div>
+  {% endif %}
+
+</section>
+
+<style>
+    .why-coverland {
+      padding: 80px 0;
+      background: var(--bg-color, #f5f5f5);
+    }
+
+    /* Class dùng chung để khống chế chiều rộng nội dung là 800px */
+    .why-content-width {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .why-section-header {
+      text-align: center;
+    }
+
+    .why-title {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .why-description {
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 17px;
+    }
+
+    /* Block Heading & Text Styles */
+    .why-block-heading {
+      font-weight: 700;
+      line-height: 1.2;
+      display: block;
+    }
+
+    .why-block-text {
+      line-height: 1.6;
+      display: block;
+    }
+    
+    .why-block-text p { margin: 0; }
+    .why-block-text a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    /* Feature List */
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      text-align: left;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .why-icon {
+      min-width: var(--icon-size);
+      height: var(--icon-size);
+      border-radius: 50%;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(var(--icon-size) * 0.55);
+      margin-top: 2px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .why-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .why-content h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .why-content p {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Buttons */
+    .why-button {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .btn-section {
+      background: #111;
+      color: white;
+      padding: 14px 28px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .why-block-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .why-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .why-btn--primary {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: 1px solid var(--btn-bg);
+    }
+    .why-btn--primary:hover { opacity: 0.85; }
+
+    .why-btn--secondary {
+      background-color: transparent;
+      color: var(--btn-text);
+      border: 1px solid var(--btn-bg);
+    }
+    .why-btn--secondary:hover {
+      background-color: var(--btn-bg);
+      color: #fff;
+    }
+
+    .why-btn--underline {
+      background-color: transparent;
+      color: var(--btn-text);
+      padding: 8px 0;
+      border-radius: 0;
+      border-bottom: 2px solid var(--btn-bg);
+    }
+    .why-btn--underline:hover { opacity: 0.7; }
+
+    /* Block Image */
+    .why-image-wrapper {
+      margin: 20px auto 20px;
+      display: block;
+    }
+    
+    .why-image-wrapper img,
+    .why-image-wrapper svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--img-radius, 0px);
+    }
+
+    .placeholder-svg {
+      background-color: #e1e1e1;
+      fill: #888;
+      max-height: 400px;
+    }
+
+    .why-image--default { max-width: 800px; padding: 0 20px; }
+    .why-image--use_container_box { max-width: 1200px; padding: 0 20px; }
+    .why-image--full_width { max-width: 100%; padding: 0; }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .why-title { font-size: 26px; }
+      .why-block-actions { flex-direction: column; }
+      .why-btn { width: 100%; }
+      
+      /* Giảm nhẹ size chữ block trên mobile */
+      .why-block-heading { font-size: calc(var(--font-size, 34px) * 0.85) !important; }
+      .why-block-text { font-size: calc(var(--font-size, 17px) * 0.9) !important; }
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Why choose coverland",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Title (Optional)"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "Section Button (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading Text",
+          "default": "Block Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "HTML Tag",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ],
+          "default": "h2",
+          "info": "Chọn thẻ H2-H6 để tối ưu SEO."
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 12,
+          "max": 72,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 34
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text Color",
+          "default": "#111111"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 16
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text Content",
+          "default": "<p>Add your custom text description here.</p>"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 12,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 17
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text Color",
+          "default": "#666666"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 40
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Feature description"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Click here"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary (Outline)" },
+            { "value": "underline", "label": "Underline" }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Button/Border Color",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image Link",
+          "info": "Tùy chọn: Thêm link khi khách click vào ảnh"
+        },
+        {
+          "type": "select",
+          "id": "container_type",
+          "label": "Container type",
+          "options": [
+            { "value": "default", "label": "Default (800px)" },
+            { "value": "use_container_box", "label": "Use container box (1200px)" },
+            { "value": "full_width", "label": "Full width (100%)" }
+          ],
+          "default": "default"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Why choose coverland",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "button" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

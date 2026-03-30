@@ -1,0 +1,126 @@
+{% liquid
+  assign container = section.settings.container
+  if container == 'full'
+    assign container_class = 'promo-banner--full'
+  endif
+%}
+
+<style>
+  #promo-banner-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #promo-banner-{{ section.id }} .promo-banner__image{
+    width:100%;
+    height: {{ section.settings.image_height }}px;
+    object-fit: cover;
+    display:block;
+  }
+
+  @media(max-width:768px){
+    #promo-banner-{{ section.id }} .promo-banner__image{
+      height: {{ section.settings.image_height_mobile }}px;
+    }
+  }
+</style>
+
+<section id="promo-banner-{{ section.id }}" class="promo-banner {{ container_class }}">
+  {% if section.settings.banner_link != blank %}
+    <a href="{{ section.settings.banner_link }}" class="promo-banner__link">
+  {% endif %}
+
+  <picture>
+    {% if section.settings.image_mobile != blank %}
+      <source
+        media="(max-width:768px)"
+        srcset="{{ section.settings.image_mobile | image_url: width: 1200 }}"
+      >
+    {% endif %}
+
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'promo-banner__image', loading: 'lazy' }}
+    {% else %}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'promo-banner__image' }}
+    {% endif %}
+  </picture>
+
+  {% if section.settings.banner_link != blank %}
+    </a>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image (Desktop)"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Banner image (Mobile)"
+    },
+
+    {
+      "type": "url",
+      "id": "banner_link",
+      "label": "Banner link"
+    },
+
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Image height desktop",
+      "default": 120
+    },
+
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "min": 40,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Image height mobile",
+      "default": 80
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Promo Banner"
+    }
+  ]
+}
+{% endschema %}

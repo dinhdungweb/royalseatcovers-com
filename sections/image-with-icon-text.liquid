@@ -1,0 +1,195 @@
+<section class="unboxing-section" style="background: {{ section.settings.bg_color }};">
+  <div class="unboxing-container">
+    <div class="unboxing-grid {% if section.settings.image_position == 'right' %}reverse{% endif %}">
+      {% if section.settings.image != blank %}
+        <div class="unboxing-image">
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            width="600"
+            height="600"
+            loading="lazy"
+            alt="{{ section.settings.title | escape }}"
+          >
+        </div>
+      {% endif %}
+
+      <div class="unboxing-content">
+        {% if section.settings.icon != blank %}
+          <div class="unboxing-icon">
+            <img
+              src="{{ section.settings.icon | image_url: width: section.settings.icon_size }}"
+              width="{{ section.settings.icon_size }}"
+              height="{{ section.settings.icon_size }}"
+              loading="lazy"
+              alt=""
+            >
+          </div>
+        {% endif %}
+
+        {% if section.settings.title != blank %}
+          <h2 class="unboxing-title">
+            {{ section.settings.title }}
+            {% if section.settings.highlight != blank %}
+              <span>{{ section.settings.highlight }}</span>
+            {% endif %}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p class="unboxing-description">
+            {{ section.settings.description }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    .unboxing-section{
+    padding:80px 20px;
+    }
+
+    .unboxing-container{
+    max-width:1200px;
+    margin:auto;
+    }
+
+    .unboxing-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+    }
+
+    .unboxing-grid.reverse .unboxing-image{
+    order:2;
+    }
+
+    .unboxing-grid.reverse .unboxing-content{
+    order:1;
+    }
+
+    .unboxing-image img{
+    width:100%;
+    height:auto;
+    border-radius:8px;
+    display:block;
+    }
+
+    .unboxing-icon{
+    margin-bottom:16px;
+    }
+
+  .unboxing-icon img{
+    width:{{ section.settings.icon_size }}px;
+    height:{{ section.settings.icon_size }}px;
+  }
+
+    .unboxing-title{
+    font-size:34px;
+    font-weight:700;
+    line-height:1.2;
+    margin-bottom:18px;
+    color:#111;
+    }
+
+    .unboxing-title span{
+    display:block;
+    color:{{ section.settings.highlight_color }};
+    }
+
+    .unboxing-description{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    max-width:420px;
+    }
+
+    @media(max-width:900px){
+
+    .unboxing-grid{
+    grid-template-columns:1fr;
+    gap:40px;
+    }
+
+    .unboxing-title{
+    font-size:26px;
+    }
+
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Image with Icon Text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "An Unboxing Experience"
+    },
+    {
+      "type": "text",
+      "id": "highlight",
+      "label": "Highlight text",
+      "default": "Like No Other."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Every detail of our unboxing is designed to deliver a premium experience."
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight color",
+      "default": "#e5c100"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f5f5f5"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Image with Icon Text"
+    }
+  ]
+}
+{% endschema %}

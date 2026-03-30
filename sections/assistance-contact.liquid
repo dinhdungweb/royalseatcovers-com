@@ -1,0 +1,173 @@
+<style>
+  .assistance-section-{{ section.id }} {
+    padding: 60px 20px;
+  }
+
+  .assistance-inner-{{ section.id }} {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .assistance-box-{{ section.id }} {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+  }
+
+  .assist-left-{{ section.id }} h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: #111;
+  }
+
+  .assist-left-{{ section.id }} p {
+    font-size: 16px;
+    margin: 0 0 10px;
+    color: #333;
+  }
+
+  .assist-left-{{ section.id }} small {
+    font-size: 12px;
+    font-style: italic;
+    color: #666;
+  }
+
+  .assist-right-{{ section.id }} {
+    text-align: center;
+    min-width: 150px;
+    border-left: 1px solid #eee;
+    padding-left: 20px;
+  }
+
+  .assist-right-icon-{{ section.id }} {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #ba2828;
+    color: #fff;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .assist-right-icon-{{ section.id }} svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  .assist-right-title-{{ section.id }} {
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #111;
+  }
+
+  .assist-right-phone-{{ section.id }} {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid #ba2828;
+    color: #ba2828;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .assist-right-phone-{{ section.id }}:hover {
+    background: #ba2828;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .assistance-section-{{ section.id }} {
+      padding: 40px 16px;
+    }
+
+    .assistance-box-{{ section.id }} {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .assist-right-{{ section.id }} {
+      border-left: none;
+      border-top: 1px solid #eee;
+      padding-left: 0;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+  }
+</style>
+
+<section class="assistance-section-{{ section.id }}">
+  <div class="assistance-inner-{{ section.id }}">
+    <div class="assistance-box-{{ section.id }}">
+      <div class="assist-left-{{ section.id }}">
+        <h3>{{ section.settings.heading }}</h3>
+        <p>{{ section.settings.subheading }}</p>
+        <small>{{ section.settings.note }}</small>
+      </div>
+
+      <div class="assist-right-{{ section.id }}">
+        <div class="assist-right-icon-{{ section.id }}">
+          <svg viewBox="0 0 24 24">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
+        </div>
+
+        <span class="assist-right-title-{{ section.id }}">Call Us</span>
+
+        <a
+          href="tel:{{ section.settings.phone_number | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}"
+          class="assist-right-phone-{{ section.id }}"
+        >
+          {{ section.settings.phone_number }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Assistance Contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Need Further Assistance?"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Contact one of our Product Specialists Today!"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Working Hours Note",
+      "default": "Our customer support services are available 7 days a week 9:00 AM to 5:30 PM PST."
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "(800) 799-5165"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Assistance Contact"
+    }
+  ]
+}
+{% endschema %}
