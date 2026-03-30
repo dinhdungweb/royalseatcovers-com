@@ -27,7 +27,8 @@
           assign input_id = 'color-' | append: section.id | append: '-' | append: forloop.index0
           assign variant = null
           for v in product.variants
-            if v.options[color_option.position | minus: 1] == value
+            assign color_index = color_option.position | minus: 1
+            if v.options[color_index] == value
               assign variant = v
               break
             endif

@@ -50,7 +50,8 @@
           # If no direct match, fallback to first variant with this setup
           if variant_with_this_setup == null
              for variant in product.variants
-               if variant.options[setup_option.position | minus: 1] == value
+               assign setup_index = setup_option.position | minus: 1
+               if variant.options[setup_index] == value
                  assign variant_with_this_setup = variant
                  break
                endif
