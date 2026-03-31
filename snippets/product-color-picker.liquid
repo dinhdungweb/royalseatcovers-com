@@ -57,6 +57,7 @@
             style="background-image: url('{{ image_url }}');"
             title="{{ value | escape }}"
           >
+            <span class="m:visually-hidden">{{ value }}</span>
           </label>
           <span class="m-tooltip__content">{{ value }}</span>
         </div>
