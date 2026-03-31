@@ -8020,6 +8020,9 @@ variant-picker
 
 .setup-card--content {
   flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .setup-card--header {
@@ -8042,9 +8045,10 @@ variant-picker
 }
 
 .setup-card--pricing {
+  text-align: right;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .price-labels {

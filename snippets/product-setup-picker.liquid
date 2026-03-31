@@ -80,14 +80,12 @@
           <div class="setup-card--content">
              <div class="setup-card--header">
                 <span class="setup-name">{{ value }}</span>
+                {% if savings > 0 %}
+                  <span class="label-save">Save {{ savings | money }}</span>
+                {% endif %}
              </div>
              
               <div class="setup-card--pricing">
-                <div class="price-labels">
-                   {% if savings > 0 %}
-                     <span class="label-save">Save {{ savings | money }}</span>
-                   {% endif %}
-                </div>
                 <div class="price-values">
                    {% if compare_at_price > price %}
                     <span class="price-compare">{{ compare_at_price | money }}</span>
