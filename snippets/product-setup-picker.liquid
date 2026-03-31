@@ -7,7 +7,7 @@
   assign setup_option = null
   for option in product.options_with_values
     assign option_name = option.name | downcase
-    if option_name == 'setup' or option_name == 'set' or option_name == 'coverage'
+    if option_name == 'setup' or option_name == 'set' or option_name == 'coverage' or option_name contains 'seat'
       assign setup_option = option
       break
     endif
