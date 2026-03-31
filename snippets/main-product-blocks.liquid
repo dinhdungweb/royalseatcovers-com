@@ -1901,7 +1901,7 @@
     // Listen for Color and Setup changes
     document.addEventListener('change', function(e) {
       if (e.target.closest('.product-color-picker') || e.target.closest('.product-setup-picker')) {
-        validateAndSyncSteps(true);
+        validateAndSyncSteps(false);
       }
     });
 
