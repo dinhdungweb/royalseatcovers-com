@@ -305,7 +305,7 @@
             "alignment": "center",
             "block_custom_class": "",
             "animations": "inherit",
-            "enable_preload_image": false
+            "enable_preload_image": true
           }
         },
         "text_netRQe": {
