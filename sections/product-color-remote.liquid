@@ -58,17 +58,6 @@
     background-color: #eee;
     transition: opacity 0.3s ease;
   }
-  .m-remote-color-swatch__name {
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-  }
   .m-remote-color-swatch:hover .m-remote-color-swatch__name {
     opacity: 1;
   }
@@ -127,6 +116,7 @@
               loading="lazy"
             >
           {% endif %}
+          <span class="m-remote-color-swatch__name">{{ value }}</span>
         </div>
       {% endfor %}
     </div>
