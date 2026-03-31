@@ -13,8 +13,8 @@
       "type": "promo-banner",
       "name": "Promo Banner",
       "settings": {
-        "image": "shopify://shop_images/leaderbannerdesktop-ezgif.com-png-to-webp-converter.webp",
-        "image_mobile": "shopify://shop_images/leaderbannermobileresize.webp",
+        "image": "shopify://shop_images/leaderbannerdesktop.webp",
+        "image_mobile": "shopify://shop_images/leaderbannermobile.webp",
         "banner_link": "",
         "image_height": 100,
         "image_height_mobile": 50,
