@@ -7967,7 +7967,7 @@ variant-picker
   display: flex;
   border: 1px solid #e5e5e5;
   border-radius: 12px;
-  padding: 16px;
+  padding: 12px 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -8025,8 +8025,8 @@ variant-picker
 .setup-card--header {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 12px;
+  gap: 2px;
+  margin-bottom: 4px;
 }
 
 .setup-badge {
@@ -8059,9 +8059,10 @@ variant-picker
 }
 
 .label-save {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   color: #BE1B1B;
+  opacity: 0.9;
 }
 
 .price-values {
