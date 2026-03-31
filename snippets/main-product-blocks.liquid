@@ -1815,6 +1815,7 @@
       const step1 = document.getElementById('step-1-container');
       const step2 = document.getElementById('step-2-container');
       const step3 = document.getElementById('step-3-container');
+      const atcButtons = document.querySelectorAll('.m-add-to-cart');
 
       // Step 1 check
       if (vehicleDone) {
@@ -1846,17 +1847,17 @@
         step3.classList.remove('completed');
       }
 
-      if (atcButton) {
+      atcButtons.forEach(btn => {
         if (allDone) {
-          atcButton.disabled = false;
-          atcButton.style.opacity = '1';
-          atcButton.style.pointerEvents = 'auto';
+          btn.setAttribute('data-steps-complete', 'true');
+          btn.style.opacity = '1';
+          btn.style.cursor = 'pointer';
         } else {
-          atcButton.disabled = true;
-          atcButton.style.opacity = '0.5';
-          atcButton.style.pointerEvents = 'none';
+          btn.setAttribute('data-steps-complete', 'false');
+          btn.style.opacity = '0.7';
+          btn.style.cursor = 'pointer';
         }
-      }
+      });
     }
 
     yearSelect.addEventListener('change', function() {
@@ -1905,9 +1906,29 @@
     // Listen for Color and Setup changes
     document.addEventListener('change', function(e) {
       if (e.target.closest('.product-color-picker') || e.target.closest('.product-setup-picker')) {
-        validateAndSyncSteps(false);
+        validateAndSyncSteps();
       }
     });
+
+    // Intercept ATC clicks if steps aren't complete
+    document.addEventListener('click', function(e) {
+      const atcBtn = e.target.closest('.m-add-to-cart');
+      if (atcBtn && atcBtn.getAttribute('data-steps-complete') === 'false') {
+        const stepper = document.querySelector('.vehicle-config-stepper');
+        if (stepper) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          const offset = 100;
+          const elementPosition = stepper.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }, true);
 
     // URL Parameters handling
     const urlParams = new URLSearchParams(window.location.search);
