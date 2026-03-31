@@ -1,0 +1,232 @@
+{%- liquid
+  assign product_target = section.settings.product | default: product
+  assign container_padding = section.settings.padding_top | append: 'px ' | append: section.settings.padding_right | append: 'px ' | append: section.settings.padding_bottom | append: 'px ' | append: section.settings.padding_left | append: 'px'
+  
+  assign color_option = null
+  for option in product_target.options_with_values
+    assign name = option.name | downcase
+    if name contains 'color' or name contains 'màu'
+      assign color_option = option
+      break
+    endif
+  endfor
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding: {{ container_padding }};
+    background: {{ section.settings.bg_color }};
+  }
+  .m-remote-color-picker {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: {{ section.settings.alignment }};
+  }
+  .m-remote-color-picker__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+  }
+  .m-remote-color-picker__swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: {% if section.settings.alignment == 'center' %}center{% elsif section.settings.alignment == 'right' %}flex-end{% else %}flex-start{% endif %};
+  }
+  .m-remote-color-swatch {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    padding: 3px;
+    background-clip: content-box;
+  }
+  .m-remote-color-swatch:hover {
+    transform: scale(1.1);
+  }
+  .m-remote-color-swatch.is-active {
+    border-color: #000;
+    box-shadow: 0 0 0 2px #fff inset;
+  }
+  .m-remote-color-swatch__image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #eee;
+    transition: opacity 0.3s ease;
+  }
+  .m-remote-color-swatch__name {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .m-remote-color-swatch:hover .m-remote-color-swatch__name {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .m-remote-color-swatch {
+      width: 50px;
+      height: 50px;
+    }
+  }
+</style>
+
+<div class="m-remote-color-picker" id="RemoteColorPicker-{{ section.id }}">
+  {% if section.settings.title != blank %}
+    <h2 class="m-remote-color-picker__title">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  {% if color_option %}
+    <div class="m-remote-color-picker__swatches" data-variant-picker-target>
+      {% for value in color_option.values %}
+        {% liquid
+          assign variant_image = null
+          for variant in product_target.variants
+            assign color_idx = color_option.position | minus: 1
+            if variant.options[color_idx] == value
+              assign variant_image = variant.image | default: product_target.featured_image
+              break
+            endif
+          endfor
+        %}
+        <div 
+          class="m-remote-color-swatch{% if color_option.selected_value == value %} is-active{% endif %}" 
+          data-value="{{ value | escape }}"
+          title="{{ value | escape }}"
+        >
+          {% if variant_image %}
+            <img 
+              src="{{ variant_image | image_url: width: 120 }}" 
+              alt="{{ value | escape }}" 
+              class="m-remote-color-swatch__image"
+              width="60"
+              height="60"
+              loading="lazy"
+            >
+          {% endif %}
+          <span class="m-remote-color-swatch__name">{{ value }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Product colors not found or product not selected.</p>
+  {% endif %}
+</div>
+
+<script>
+  (function() {
+    const initRemotePicker = () => {
+      const section = document.getElementById('RemoteColorPicker-{{ section.id }}');
+      if (!section) return;
+
+      const swatches = section.querySelectorAll('.m-remote-color-swatch');
+      
+      swatches.forEach(swatch => {
+        swatch.addEventListener('click', function() {
+          const value = this.getAttribute('data-value');
+          
+          // 1. Update UI inside this remote section
+          swatches.forEach(s => s.classList.remove('is-active'));
+          this.classList.add('is-active');
+
+          // 2. Find the REAL variant picker on the page
+          const mainVariantPicker = document.querySelector('variant-picker');
+          if (mainVariantPicker) {
+            const realInput = mainVariantPicker.querySelector(`input[value="${value}"], select option[value="${value}"]`);
+            
+            if (realInput) {
+              if (realInput.tagName === 'INPUT') {
+                realInput.click();
+              } else if (realInput.tagName === 'OPTION') {
+                const parentSelect = realInput.closest('select');
+                parentSelect.value = value;
+                parentSelect.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            }
+          }
+        });
+      });
+
+      document.addEventListener('variant:changed', function(e) {
+        const variant = e.detail.variant;
+        if (variant && variant.options) {
+           variant.options.forEach(opt => {
+              const matchingSwatch = section.querySelector(`.m-remote-color-swatch[data-value="${opt}"]`);
+              if (matchingSwatch) {
+                swatches.forEach(s => s.classList.remove('is-active'));
+                matchingSwatch.classList.add('is-active');
+              }
+           });
+        }
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRemotePicker);
+    } else {
+      initRemotePicker();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Remote Color Picker",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Choose Your Color"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Target Product",
+      "info": "Defaults to the current product if placed on a product template."
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Paddings"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 40, "label": "Padding Top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 40, "label": "Padding Bottom" },
+    { "type": "range", "id": "padding_left", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 20, "label": "Padding Left" },
+    { "type": "range", "id": "padding_right", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 20, "label": "Padding Right" }
+  ],
+  "presets": [
+    {
+      "name": "Remote Color Picker"
+    }
+  ]
+}
+{% endschema %}
