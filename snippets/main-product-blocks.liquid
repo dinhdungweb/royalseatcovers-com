@@ -1839,25 +1839,28 @@
         step3.classList.remove('active');
       }
 
-      // Step 3 check (for ATC button)
-      const allDone = vehicleDone && colorSelected && setupSelected;
-      if (allDone) {
-        step3.classList.add('completed');
-      } else {
-        step3.classList.remove('completed');
-      }
-
+      const atcButtons = document.querySelectorAll('.m-add-to-cart');
       atcButtons.forEach(btn => {
         if (allDone) {
           btn.setAttribute('data-steps-complete', 'true');
           btn.style.opacity = '1';
-          btn.style.cursor = 'pointer';
         } else {
           btn.setAttribute('data-steps-complete', 'false');
           btn.style.opacity = '0.7';
-          btn.style.cursor = 'pointer';
         }
+        btn.style.cursor = 'pointer';
+        btn.disabled = false; // Ensure it's clickable for the scroll logic
+        btn.style.pointerEvents = 'auto'; // Force pointer events
       });
+    }
+
+    function isConfigurationComplete() {
+      const vehicleDone = yearSelect.value && makeSelect.value && modelSelect.value && trimSelect.value && cabSelect.value;
+      const colorPicker = document.querySelector('.product-color-picker');
+      const setupPicker = document.querySelector('.product-setup-picker');
+      const colorSelected = colorPicker ? colorPicker.querySelector('input:checked') : true; 
+      const setupSelected = setupPicker ? setupPicker.querySelector('input:checked') : true;
+      return vehicleDone && colorSelected && setupSelected;
     }
 
     yearSelect.addEventListener('change', function() {
@@ -1913,19 +1916,26 @@
     // Intercept ATC clicks if steps aren't complete
     document.addEventListener('click', function(e) {
       const atcBtn = e.target.closest('.m-add-to-cart');
-      if (atcBtn && atcBtn.getAttribute('data-steps-complete') === 'false') {
-        const stepper = document.querySelector('.vehicle-config-stepper');
-        if (stepper) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          const offset = 100;
-          const elementPosition = stepper.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+      if (atcBtn) {
+        // Real-time check to be 100% sure, or fallback if attribute isn't set yet
+        const isComplete = atcBtn.getAttribute('data-steps-complete') === 'true' || isConfigurationComplete();
+        
+        if (!isComplete) {
+          const stepper = document.querySelector('.vehicle-config-stepper');
+          if (stepper) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const offset = 120; // Increased offset to see Step 1 clearly
+            const elementPosition = stepper.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
         }
       }
     }, true);
