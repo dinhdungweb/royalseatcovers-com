@@ -45,9 +45,7 @@
     padding: 3px;
     background-clip: content-box;
   }
-  .m-remote-color-swatch:hover {
-    transform: scale(1.1);
-  }
+
   .m-remote-color-swatch.is-active {
     border-color: #000;
     box-shadow: 0 0 0 2px #fff inset;
@@ -82,11 +80,11 @@
       justify-content: flex-start;
       -webkit-overflow-scrolling: touch;
       padding-bottom: 5px;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .m-remote-color-picker__swatches::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
+      display: none;
     }
     .m-remote-color-swatch {
       width: 60px;
@@ -150,18 +148,15 @@
         swatch.addEventListener('click', function() {
           const value = this.getAttribute('data-value');
           
-          // 1. Update UI inside this remote section
           swatches.forEach(s => s.classList.remove('is-active'));
           this.classList.add('is-active');
 
-          // 2. Find the REAL variant picker on the page
           const mainVariantPicker = document.querySelector('variant-picker');
           if (mainVariantPicker) {
             const realInput = mainVariantPicker.querySelector(`input[value="${value}"], select option[value="${value}"]`);
             
             if (realInput) {
               if (realInput.tagName === 'INPUT') {
-                // Using dispatchEvent instead of click() to avoid potential browser autofocus/scrolling
                 realInput.checked = true;
                 realInput.dispatchEvent(new Event('change', { bubbles: true }));
               } else if (realInput.tagName === 'OPTION') {
