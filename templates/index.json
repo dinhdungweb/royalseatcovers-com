@@ -564,7 +564,7 @@
         "star_color": "#e84e4e",
         "item_color_scheme": "footer",
         "padding_top": 40,
-        "padding_bottom": 0,
+        "padding_bottom": 20,
         "custom_class": "",
         "animations": "inherit"
       }
