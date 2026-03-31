@@ -510,12 +510,12 @@
         {%- endstyle -%}
       {%- when 'vehicle_selector', 'variant_picker' -%}
         <style>
-          .vehicle-config-stepper { margin-top: 20px; }
+          .vehicle-config-stepper { margin-top: 10px; }
           .stepper-item {
             opacity: 0.5;
             pointer-events: none;
             transition: all 0.3s ease;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: flex;
           }
           .stepper-item.active, .stepper-item.completed {
@@ -590,6 +590,45 @@
             border: 2px solid #000;
             box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
             transform: scale(1.05);
+          }
+
+          /* Vehicle Selector Customizations */
+          .vehicle-selector {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 12px !important;
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+          }
+          .vehicle-field {
+            margin-bottom: 0 !important;
+          }
+          .vehicle-field label {
+            font-size: 11px !important;
+            text-transform: uppercase !important;
+            margin-bottom: 4px !important;
+            display: block !important;
+          }
+          .vehicle-field select {
+            width: 100% !important;
+            padding: 8px !important;
+            font-size: 13px !important;
+          }
+
+          @media (max-width: 768px) {
+            .vehicle-selector {
+              grid-template-columns: repeat(3, 1fr) !important;
+              gap: 8px !important;
+            }
+            .stepper-item {
+              margin-bottom: 15px;
+            }
+            .stepper-title {
+              font-size: 16px !important;
+              margin-bottom: 10px !important;
+            }
           }
         </style>
 
