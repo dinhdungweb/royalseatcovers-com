@@ -37,7 +37,7 @@
       "type": "product-color-remote",
       "name": "Remote Color Picker",
       "settings": {
-        "title": "Choose Your Color",
+        "title": "",
         "product": "",
         "alignment": "center",
         "bg_color": "#ffffff",
