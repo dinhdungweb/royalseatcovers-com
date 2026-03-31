@@ -75,6 +75,8 @@
     const cabSelect = document.getElementById('vehicle-cab');
     const validationMessage = document.getElementById('vehicle-validation-message');
     const atcButton = document.querySelector('.m-add-to-cart');
+    const trimWrapper = document.getElementById('trim-wrapper');
+    const cabWrapper = document.getElementById('cab-wrapper');
 
     const allOptions = {
       make: Array.from(makeSelect.options),
@@ -100,10 +102,13 @@
         }
       });
       targetSelect.disabled = !matchFound;
+      return matchFound;
     }
 
     function validateAndSyncSteps() {
-      const vehicleDone = yearSelect.value && makeSelect.value && modelSelect.value && trimSelect.value && cabSelect.value;
+      const trimRequired = !trimSelect.disabled;
+      const cabRequired = !cabSelect.disabled;
+      const vehicleDone = yearSelect.value && makeSelect.value && modelSelect.value && (!trimRequired || trimSelect.value) && (!cabRequired || cabSelect.value);
       
       // Step 1 status
       if (vehicleDone) {
@@ -145,13 +150,24 @@
     });
 
     modelSelect.addEventListener('change', function() {
-      updateDropdown(trimSelect, allOptions.trim, 'data-model', this.value, 'Select Trim');
+      const hasTrim = updateDropdown(trimSelect, allOptions.trim, 'data-model', this.value, 'Select Trim');
       initSelect(cabSelect, 'Select Cab Size');
+      if (this.value && hasTrim) {
+        if (trimWrapper) trimWrapper.style.display = 'block';
+      } else {
+        if (trimWrapper) trimWrapper.style.display = 'none';
+      }
+      if (cabWrapper) cabWrapper.style.display = 'none';
       validateAndSyncSteps();
     });
 
     trimSelect.addEventListener('change', function() {
-      updateDropdown(cabSelect, allOptions.cab, 'data-trim', this.value, 'Select Cab Size');
+      const hasCab = updateDropdown(cabSelect, allOptions.cab, 'data-trim', this.value, 'Select Cab Size');
+      if (this.value && hasCab) {
+        if (cabWrapper) cabWrapper.style.display = 'block';
+      } else {
+        if (cabWrapper) cabWrapper.style.display = 'none';
+      }
       validateAndSyncSteps();
     });
 
