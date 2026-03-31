@@ -36,8 +36,8 @@
   }
   .m-remote-color-swatch {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -77,8 +77,8 @@
   
   @media (max-width: 768px) {
     .m-remote-color-swatch {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
     }
   }
 </style>
@@ -108,11 +108,11 @@
         >
           {% if variant_image %}
             <img 
-              src="{{ variant_image | image_url: width: 120 }}" 
+              src="{{ variant_image | image_url: width: 160 }}" 
               alt="{{ value | escape }}" 
               class="m-remote-color-swatch__image"
-              width="60"
-              height="60"
+              width="80"
+              height="80"
               loading="lazy"
             >
           {% endif %}
@@ -148,7 +148,9 @@
             
             if (realInput) {
               if (realInput.tagName === 'INPUT') {
-                realInput.click();
+                // Using dispatchEvent instead of click() to avoid potential browser autofocus/scrolling
+                realInput.checked = true;
+                realInput.dispatchEvent(new Event('change', { bubbles: true }));
               } else if (realInput.tagName === 'OPTION') {
                 const parentSelect = realInput.closest('select');
                 parentSelect.value = value;
