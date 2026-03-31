@@ -15,7 +15,7 @@
 %}
 
 {% if setup_option %}
-  <div class="product-setup-picker" data-option-index="{{ setup_option.position | minus: 1 }}">
+  <div class="product-setup-picker m-product-option" data-option-index="{{ setup_option.position | minus: 1 }}">
     <div class="setup-options">
       {% for value in setup_option.values %}
         {% liquid
