@@ -530,10 +530,7 @@
             justify-content: center;
           }
           .stepper-marker {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-right: 20px;
+            display: none;
           }
           .stepper-number {
             width: 32px;
@@ -605,7 +602,7 @@
                 <div class="stepper-line"></div>
               </div>
               <div class="stepper-content">
-                <h3 class="stepper-title">Vehicle Details</h3>
+                <h3 class="stepper-title">1. Vehicle Details</h3>
                 <div class="stepper-pane">
                    {% render 'vehicle-selector', product_form_id: product_form_id %}
                    <div id="vehicle-validation-message" style="color: #BE1B1B; font-size: 13px; font-weight: 600; margin-top: 10px; display: none;">
@@ -630,7 +627,7 @@
                   <div class="stepper-line"></div>
                 </div>
                 <div class="stepper-content">
-                  <h3 class="stepper-title">Color - <span id="selected-color-name">{{ product.selected_or_first_available_variant.options[0] }}</span></h3>
+                  <h3 class="stepper-title">2. Color - <span id="selected-color-name">{{ product.selected_or_first_available_variant.options[0] }}</span></h3>
                   <div class="stepper-pane">
                      {% render 'product-color-picker', product: product, product_form_id: product_form_id %}
                   </div>
@@ -644,7 +641,7 @@
                   <div class="stepper-line"></div>
                 </div>
                 <div class="stepper-content">
-                  <h3 class="stepper-title">Choose Your Setup</h3>
+                  <h3 class="stepper-title">3. Choose Your Setup</h3>
                   <div class="stepper-pane">
                      {% render 'product-setup-picker', product: product, product_form_id: product_form_id %}
                   </div>
@@ -1825,30 +1822,21 @@
         step1.classList.add('completed');
         step2.classList.add('active');
         if (validationMessage) validationMessage.style.display = 'none';
-        if (autoScroll && step1.dataset.scrolled !== 'true') {
-           step2.scrollIntoView({ behavior: 'smooth', block: 'center' });
-           step1.dataset.scrolled = 'true';
-        }
       } else {
         step1.classList.remove('completed');
         step2.classList.remove('active');
         step3.classList.remove('active');
-        step1.dataset.scrolled = 'false';
         if (validationMessage) validationMessage.style.display = 'block';
+        return;
       }
 
       // Step 2 check
-      if (vehicleDone && colorSelected) {
+      if (colorSelected) {
         step2.classList.add('completed');
         step3.classList.add('active');
-        if (autoScroll && step2.dataset.scrolled !== 'true') {
-           step3.scrollIntoView({ behavior: 'smooth', block: 'center' });
-           step2.dataset.scrolled = 'true';
-        }
       } else {
         step2.classList.remove('completed');
         step3.classList.remove('active');
-        step2.dataset.scrolled = 'false';
       }
 
       // Step 3 check (for ATC button)
