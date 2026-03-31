@@ -1812,10 +1812,11 @@
       const colorSelected = colorPicker ? colorPicker.querySelector('input:checked') : true; 
       const setupSelected = setupPicker ? setupPicker.querySelector('input:checked') : true;
 
+      const allDone = vehicleDone && colorSelected && setupSelected;
+
       const step1 = document.getElementById('step-1-container');
       const step2 = document.getElementById('step-2-container');
       const step3 = document.getElementById('step-3-container');
-      const atcButtons = document.querySelectorAll('.m-add-to-cart');
 
       // Step 1 check
       if (vehicleDone) {
@@ -1827,16 +1828,22 @@
         step2.classList.remove('active');
         step3.classList.remove('active');
         if (validationMessage) validationMessage.style.display = 'block';
-        return;
       }
 
       // Step 2 check
-      if (colorSelected) {
+      if (vehicleDone && colorSelected) {
         step2.classList.add('completed');
         step3.classList.add('active');
       } else {
         step2.classList.remove('completed');
         step3.classList.remove('active');
+      }
+
+      // Step 3 check
+      if (allDone) {
+        step3.classList.add('completed');
+      } else {
+        step3.classList.remove('completed');
       }
 
       const atcButtons = document.querySelectorAll('.m-add-to-cart');
@@ -1849,8 +1856,8 @@
           btn.style.opacity = '0.7';
         }
         btn.style.cursor = 'pointer';
-        btn.disabled = false; // Ensure it's clickable for the scroll logic
-        btn.style.pointerEvents = 'auto'; // Force pointer events
+        btn.disabled = false;
+        btn.style.pointerEvents = 'auto';
       });
     }
 
