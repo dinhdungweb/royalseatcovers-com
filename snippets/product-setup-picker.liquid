@@ -20,8 +20,7 @@
       {% for value in setup_option.values %}
         {% liquid
           assign input_id = 'setup-' | append: section.id | append: '-' | append: forloop.index0
-          assign current_variant = product.selected_or_first_available_variant
-          
+                  
           # Find variant with this setup and current other options
           assign variant_with_this_setup = null
           for variant in product.variants
