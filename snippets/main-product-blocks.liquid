@@ -514,6 +514,72 @@
           }
         {%- endstyle -%}
       {%- when 'vehicle_selector' -%}
+        <style>
+          .stepper-item {
+            opacity: 0.5;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+          }
+          .stepper-item.active, .stepper-item.completed {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          .stepper-item.completed .stepper-number {
+            background: #222 !important;
+            color: #fff !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .stepper-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+          }
+          .stepper-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            background: #fff;
+            z-index: 2;
+          }
+          .stepper-line {
+            width: 2px;
+            flex-grow: 1;
+            background: #eee;
+            margin: 4px 0;
+          }
+          .stepper-item.completed .stepper-line {
+            background: #222;
+          }
+          .stepper-item:last-child .stepper-line {
+            display: none;
+          }
+          .stepper-item {
+            display: flex;
+          }
+          .stepper-content {
+            flex-grow: 1;
+          }
+          .stepper-title {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+          .stepper-pane {
+            padding-bottom: 10px;
+          }
+        </style>
         <div class="vehicle-config-stepper section-{{ section.id }}" data-section-id="{{ section.id }}">
           <div class="stepper-container">
             <!-- Step 1: Vehicle Details -->
@@ -559,6 +625,7 @@
               <div class="stepper-item" id="step-3-container">
                 <div class="stepper-marker">
                   <div class="stepper-number">3</div>
+                  <div class="stepper-line"></div>
                 </div>
                 <div class="stepper-content">
                   <h3 class="stepper-title">Choose Your Setup</h3>
@@ -1759,25 +1826,59 @@
       targetSelect.disabled = !matchFound;
     }
 
-    function validateAndSyncSteps() {
+    function validateAndSyncSteps(autoScroll = false) {
       const vehicleDone = yearSelect.value && makeSelect.value && modelSelect.value && trimSelect.value && cabSelect.value;
+      const colorPicker = document.querySelector('.product-color-picker');
+      const setupPicker = document.querySelector('.product-setup-picker');
       
+      const colorSelected = colorPicker ? colorPicker.querySelector('input:checked') : true; 
+      const setupSelected = setupPicker ? setupPicker.querySelector('input:checked') : true;
+
       const step1 = document.getElementById('step-1-container');
       const step2 = document.getElementById('step-2-container');
       const step3 = document.getElementById('step-3-container');
 
+      // Step 1 check
       if (vehicleDone) {
-        if (step1) step1.classList.add('completed');
-        if (step2) step2.classList.add('active');
+        step1.classList.add('completed');
+        step2.classList.add('active');
         if (validationMessage) validationMessage.style.display = 'none';
+        if (autoScroll && step1.dataset.scrolled !== 'true') {
+           step2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+           step1.dataset.scrolled = 'true';
+        }
       } else {
-        if (step1) step1.classList.remove('completed');
-        if (step2) step2.classList.remove('active');
+        step1.classList.remove('completed');
+        step2.classList.remove('active');
+        step3.classList.remove('active');
+        step1.dataset.scrolled = 'false';
         if (validationMessage) validationMessage.style.display = 'block';
       }
 
+      // Step 2 check
+      if (vehicleDone && colorSelected) {
+        step2.classList.add('completed');
+        step3.classList.add('active');
+        if (autoScroll && step2.dataset.scrolled !== 'true') {
+           step3.scrollIntoView({ behavior: 'smooth', block: 'center' });
+           step2.dataset.scrolled = 'true';
+        }
+      } else {
+        step2.classList.remove('completed');
+        step3.classList.remove('active');
+        step2.dataset.scrolled = 'false';
+      }
+
+      // Step 3 check (for ATC button)
+      const allDone = vehicleDone && colorSelected && setupSelected;
+      if (allDone) {
+        step3.classList.add('completed');
+      } else {
+        step3.classList.remove('completed');
+      }
+
       if (atcButton) {
-        if (vehicleDone) {
+        if (allDone) {
           atcButton.disabled = false;
           atcButton.style.opacity = '1';
           atcButton.style.pointerEvents = 'auto';
@@ -1794,30 +1895,62 @@
       initSelect(modelSelect, 'Select Model');
       initSelect(trimSelect, 'Select Trim');
       initSelect(cabSelect, 'Select Cab Size');
-      validateAndSyncSteps();
+      validateAndSyncSteps(true);
     });
 
     makeSelect.addEventListener('change', function() {
       updateDropdown(modelSelect, allOptions.model, 'data-make', this.value, 'Select Model');
       initSelect(trimSelect, 'Select Trim');
       initSelect(cabSelect, 'Select Cab Size');
-      validateAndSyncSteps();
+      validateAndSyncSteps(true);
     });
 
     modelSelect.addEventListener('change', function() {
       updateDropdown(trimSelect, allOptions.trim, 'data-model', this.value, 'Select Trim');
       initSelect(cabSelect, 'Select Cab Size');
-      validateAndSyncSteps();
+      validateAndSyncSteps(true);
     });
 
     trimSelect.addEventListener('change', function() {
       updateDropdown(cabSelect, allOptions.cab, 'data-trim', this.value, 'Select Cab Size');
-      validateAndSyncSteps();
+      validateAndSyncSteps(true);
     });
 
-    cabSelect.addEventListener('change', validateAndSyncSteps);
+    cabSelect.addEventListener('change', () => validateAndSyncSteps(true));
+
+    // Listen for Color and Setup changes
+    document.addEventListener('change', function(e) {
+      if (e.target.closest('.product-color-picker') || e.target.closest('.product-setup-picker')) {
+        validateAndSyncSteps(true);
+      }
+    });
+
+    // URL Parameters handling
+    const urlParams = new URLSearchParams(window.location.search);
+    const pYear = urlParams.get('year');
+    const pMake = urlParams.get('make');
+    const pModel = urlParams.get('model');
+
+    if (pYear) {
+      yearSelect.value = pYear;
+      yearSelect.dispatchEvent(new Event('change'));
+      
+      setTimeout(() => {
+        if (pMake) {
+          makeSelect.value = pMake;
+          makeSelect.dispatchEvent(new Event('change'));
+          
+          setTimeout(() => {
+            if (pModel) {
+              modelSelect.value = pModel;
+              modelSelect.dispatchEvent(new Event('change'));
+            }
+          }, 100);
+        }
+      }, 100);
+    }
 
     // Initial check
-    validateAndSyncSteps();
+    setTimeout(() => validateAndSyncSteps(false), 500);
   });
 </script>
