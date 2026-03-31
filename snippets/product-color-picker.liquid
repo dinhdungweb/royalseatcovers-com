@@ -15,10 +15,7 @@
 
 {% if color_option %}
   <div class="product-color-picker m-product-option" data-option-index="{{ color_option.position | minus: 1 }}">
-    <div class="m-product-option--label">
-      <span class="option-label--title">Color:</span>
-      <span class="option-label--selected" id="selected-color-name">{{ color_option.selected_value }}</span>
-    </div>
+    {% comment %} Redundant label removed as color is shown in stepper title {% endcomment %}
 
     <div class="m-product-option--content m:inline-flex m:flex-wrap">
       {% for value in color_option.values %}
