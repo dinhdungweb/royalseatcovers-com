@@ -28,38 +28,8 @@
         "1621243260e1af0c20-0": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/1a73eef671b2f0eca9a3.jpg",
+            "background": "shopify://shop_images/1a73eef671b2f0eca9a3_876b0506-87da-4b27-8d2e-9c2236751622.jpg",
             "mb_background": "shopify://shop_images/BannerMobileRoyalAuto.webp",
-            "content_in_container": false,
-            "content_position": "left middle",
-            "text_alignment": "left",
-            "text_size": "medium",
-            "text_color": "white",
-            "subheading": "",
-            "title": "",
-            "description": "",
-            "image_link": "",
-            "button_text": "",
-            "button_link": "",
-            "button_style": "sf__btn-secondary",
-            "button_size": "",
-            "second_button_text": "",
-            "second_button_link": "",
-            "second_button_style": "m-button--primary",
-            "second_button_size": "",
-            "show_footer": true,
-            "footer_alignment": "end",
-            "footer_text": "",
-            "footer_button": "Shop Now",
-            "footer_link": "",
-            "enable_preload_image": true
-          }
-        },
-        "slider_item_4TJeXU": {
-          "type": "slider_item",
-          "settings": {
-            "background": "shopify://shop_images/3.png",
-            "mb_background": "shopify://shop_images/3.png",
             "content_in_container": false,
             "content_position": "left middle",
             "text_alignment": "left",
@@ -87,8 +57,7 @@
         }
       },
       "block_order": [
-        "1621243260e1af0c20-0",
-        "slider_item_4TJeXU"
+        "1621243260e1af0c20-0"
       ],
       "settings": {
         "container": "w-full",
