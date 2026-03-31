@@ -81,7 +81,7 @@
           "type": "price",
           "settings": {
             "show_saving": true,
-            "sale_badge_type": "percentage"
+            "sale_badge_type": "text"
           }
         },
         "text_with_icon_t86JmV": {
