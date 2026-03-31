@@ -15,7 +15,7 @@
       "name": "Promo Banner",
       "settings": {
         "image": "shopify://shop_images/leaderbannerdesktop.webp",
-        "image_mobile": "shopify://shop_images/leaderbannermobile.webp",
+        "image_mobile": "shopify://shop_images/leaderbannermobilefix.webp",
         "banner_link": "",
         "image_height": 120,
         "image_height_mobile": 80,
