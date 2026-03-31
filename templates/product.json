@@ -296,13 +296,25 @@
     "custom_content_U7yk9C": {
       "type": "custom-content",
       "blocks": {
+        "image_37aikJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/familyhappy.webp",
+            "link": "",
+            "width": "50%",
+            "alignment": "center",
+            "block_custom_class": "",
+            "animations": "inherit",
+            "enable_preload_image": false
+          }
+        },
         "text_netRQe": {
           "type": "text",
           "settings": {
             "title": "Instead of spending millions on reupholstery",
             "subheading": "",
             "text": "<h4>I found a creative way to keep my car's interior looking brand new.</h4><p>Look, fellas, we all have that one ride. The truck, the SUV, the station wagon that’s been on more road trips than you can count. My '11 Tahoe, she’s part of the family. Done right by us, haul after haul.<br/><br/>But let's be honest, the miles show on the inside. Factory seats that were once plush and pristine were starting to feel like, well, a swap meet special. Juice stains from Sarah and mud from the dog... it was just getting old. Martha, my sweetheart, deserved better than sitting on that.<br/><br/>I needed an upgrade that looked high-end but didn't mean three grand on full reupholstery, especially when the engine still purrs. Then I saw these custom leatherette covers. Full set, front and back. The rich red color just brought a little fire back into the interior. And that diamond-quilted pattern? Gents, that shouts custom luxury comfort. <br/><br/>Installation was straightforward, a solid weekend project that I actually enjoyed. The fit is snug, looks like it rolled off the assembly line this way.<br/><br/>Next trip? You should’ve seen the smiles. Martha sat down, let out a satisfying sigh, and smiled. The kids were just as pleased, Leo running his fingers over that textured pattern. Now, look at us. We're not just a family in a car, we're a family enjoying the ride again. Feels good to take care of the old girl and the people who ride in her. Your ride is an extension of your family’s space. Give 'em the comfort they deserve and give your car that classic custom look. You won't regret it.</p>",
-            "width": "100%",
+            "width": "50%",
             "alignment": "center",
             "align_text": "left",
             "text_size": "small",
@@ -317,6 +329,7 @@
         }
       },
       "block_order": [
+        "image_37aikJ",
         "text_netRQe"
       ],
       "name": "Custom content",
