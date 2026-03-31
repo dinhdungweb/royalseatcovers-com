@@ -33,6 +33,20 @@
         "animations": "inherit"
       }
     },
+    "product_color_remote_BATQpW": {
+      "type": "product-color-remote",
+      "name": "Remote Color Picker",
+      "settings": {
+        "title": "Choose Your Color",
+        "product": "",
+        "alignment": "center",
+        "bg_color": "#ffffff",
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "padding_left": 20,
+        "padding_right": 20
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -380,20 +394,6 @@
         "padding_bottom": 38,
         "enable_preload_image": false,
         "custom_class": ""
-      }
-    },
-    "product_color_remote_BATQpW": {
-      "type": "product-color-remote",
-      "name": "Remote Color Picker",
-      "settings": {
-        "title": "Choose Your Color",
-        "product": "",
-        "alignment": "left",
-        "bg_color": "#ffffff",
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "padding_left": 20,
-        "padding_right": 20
       }
     },
     "custom_content_yGiY4L": {
