@@ -58,9 +58,6 @@
     background-color: #eee;
     transition: opacity 0.3s ease;
   }
-  .m-remote-color-swatch:hover .m-remote-color-swatch__name {
-    opacity: 1;
-  }
   
   @media (max-width: 768px) {
     .m-remote-color-picker__swatches {
@@ -116,7 +113,6 @@
               loading="lazy"
             >
           {% endif %}
-          <span class="m-remote-color-swatch__name">{{ value }}</span>
         </div>
       {% endfor %}
     </div>
