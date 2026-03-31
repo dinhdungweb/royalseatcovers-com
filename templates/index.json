@@ -1,1 +1,792 @@
-{"sections":{"promo_banner_qcf7GD":{"type":"promo-banner","name":"Promo Banner","settings":{"image":"shopify:\/\/shop_images\/car_seat_covers_truck_suv_90bb18d9-0904-4a80-a017-87051b43d770.jpg","image_mobile":"shopify:\/\/shop_images\/royal_auto_seat_cover.jpg","banner_link":"","image_height":100,"image_height_mobile":50,"padding_top":0,"padding_bottom":0}},"1621243260e1af0c20":{"type":"slider","blocks":{"1621243260e1af0c20-0":{"type":"slider_item","settings":{"background":"shopify:\/\/shop_images\/1.png","mb_background":"shopify:\/\/shop_images\/1.png","content_in_container":false,"content_position":"left middle","text_alignment":"left","text_size":"medium","text_color":"white","subheading":"","title":"","description":"","image_link":"","button_text":"","button_link":"","button_style":"sf__btn-secondary","button_size":"","second_button_text":"","second_button_link":"","second_button_style":"m-button--primary","second_button_size":"","show_footer":true,"footer_alignment":"end","footer_text":"","footer_button":"Shop Now","footer_link":"","enable_preload_image":true}},"slider_item_4TJeXU":{"type":"slider_item","settings":{"background":"shopify:\/\/shop_images\/3.png","mb_background":"shopify:\/\/shop_images\/3.png","content_in_container":false,"content_position":"left middle","text_alignment":"left","text_size":"medium","text_color":"white","subheading":"","title":"","description":"","image_link":"","button_text":"","button_link":"","button_style":"sf__btn-secondary","button_size":"","second_button_text":"","second_button_link":"","second_button_style":"m-button--primary","second_button_size":"","show_footer":true,"footer_alignment":"end","footer_text":"","footer_button":"Shop Now","footer_link":"","enable_preload_image":true}}},"block_order":["1621243260e1af0c20-0","slider_item_4TJeXU"],"settings":{"container":"w-full","slideshow_height":"adapt","show_overlay":false,"dots_position":"bottom","dots_color":"light","show_dots":false,"show_arrows":false,"autorotate":true,"autorotate_speed":2,"use_content_above":true,"custom_class":"sf-home__slideshow","animations":"inherit"}},"vehicle_finder_tqC8XM":{"type":"vehicle-finder","name":"Vehicle Finder","settings":{"heading":"SELECT YOUR VEHICLE","bg_color":"#111111","text_color":"#ffffff","button_color":"#b22222","button_text_color":"#ffffff","button_text":"GO"}},"category_cards_i6UBRp":{"type":"category-cards","blocks":{"card_r86TwY":{"type":"card","settings":{"title":"Seat Covers","subtitle":"Front Seat \/ 👉 Full Set (5 Seater) 🔥","image":"shopify:\/\/shop_images\/Thi_t_k_ch_a_co_ten_7.png","link":"shopify:\/\/products\/luxury-nappa-leather-seat-covers-tailored-fit-for-cars-suvs-trucks"}},"card_UbEN4U":{"type":"card","settings":{"title":"Car Covers","subtitle":"Car \/ SUV \/ Truck","image":"shopify:\/\/shop_images\/car-cover-home-icon.webp","link":"shopify:\/\/products\/car-cover"}},"card_ac98Ch":{"type":"card","settings":{"title":"Floor Mats","subtitle":"Car \/ SUV \/ Truck","image":"shopify:\/\/shop_images\/Thi_t_k_ch_a_co_ten_8.png","link":"shopify:\/\/products\/floor-mats"}}},"block_order":["card_r86TwY","card_UbEN4U","card_ac98Ch"],"name":"Category Cards","settings":{"heading":"","subheading":"","image_size":360}},"image_with_feature_list_jPjfPR":{"type":"image-with-feature-list","blocks":{"feature_item_CLQiyL":{"type":"feature_item","settings":{"title":"Custom-Fit Design","text":"Tailored for your exact vehicle."}},"feature_item_mD4WxY":{"type":"feature_item","settings":{"title":"Ride in Comfort","text":"Premium memory foam and built in lumbar support."}},"feature_item_DyGeHj":{"type":"feature_item","settings":{"title":"Spill & Scratch Protection","text":"Guards from pets, spills, dirt, and everyday life."}},"feature_item_gpT99V":{"type":"feature_item","settings":{"title":"Easy DIY Install","text":"Tool-free and hassle-free installation."}}},"block_order":["feature_item_CLQiyL","feature_item_mD4WxY","feature_item_DyGeHj","feature_item_gpT99V"],"name":"Image with Feature List","settings":{"top_subheading":"Tailored. Tested. Trusted.","top_heading":"WHY ROYAL AUTO?","header_margin_bottom":40,"main_image":"shopify:\/\/shop_images\/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_9.png","image_caption":"Custom-Fit Seat Covers","image_button_label":"Shop Now","button_link":"shopify:\/\/products\/car-cover","heading":"SEAT COVERS THAT FIT AND STAY.","heading_size":"h2","heading_alignment_mobile":"center","layout":"image_left","container":"container-fluid","color_scheme":"scheme-cee058e4-58e3-46aa-9af9-219dadc79066","padding_top":16,"padding_bottom":0}},"image_with_feature_list_daVdej":{"type":"image-with-feature-list","blocks":{"feature_item_XcKqJh":{"type":"feature_item","settings":{"title":"All-Weather Protection","text":"Rain. Sun. Dust. Covered."}},"feature_item_7AGHEY":{"type":"feature_item","settings":{"title":"100% Waterproof","text":"eeps your car bone-dry."}},"feature_item_HtgkPn":{"type":"feature_item","settings":{"title":"Paint-Safe Lining","text":"Soft inside. No scratches."}},"feature_item_tDDgzg":{"type":"feature_item","settings":{"title":"Snug, Model-Specific Fit","text":"Made for your Vehicle. Perfect fit."}}},"block_order":["feature_item_XcKqJh","feature_item_7AGHEY","feature_item_HtgkPn","feature_item_tDDgzg"],"name":"Image with Feature List","settings":{"top_subheading":"","top_heading":"","header_margin_bottom":40,"main_image":"shopify:\/\/shop_images\/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_5.png","image_caption":"Custom-Fit Car Covers","image_button_label":"Shop Now","button_link":"shopify:\/\/products\/car-cover","heading":"CAR COVERS THAT ACTUALLY PROTECT","heading_size":"h2","heading_alignment_mobile":"center","layout":"image_right","container":"container-fluid","color_scheme":"","padding_top":16,"padding_bottom":0}},"image_with_feature_list_ayrFfF":{"type":"image-with-feature-list","blocks":{"feature_item_GFzB6w":{"type":"feature_item","settings":{"title":"3D-Scanned Precision Fit","text":"Engineered to hug every curve and corner of your vehicle."}},"feature_item_GTaJLa":{"type":"feature_item","settings":{"title":"All-Season Protection","text":"Rain, snow, mud, or spills - these mats don't flinch."}},"feature_item_qU8hC8":{"type":"feature_item","settings":{"title":"Stay-Put Durability","text":"Textured grip. Locked in. Scratch-proof."}},"feature_item_xEmFeU":{"type":"feature_item","settings":{"title":"Easy to Clean. Easier to Maintain.","text":"Quick wipe or vacuum. No buildup, good as new."}}},"block_order":["feature_item_GFzB6w","feature_item_GTaJLa","feature_item_qU8hC8","feature_item_xEmFeU"],"name":"Image with Feature List","settings":{"top_subheading":"","top_heading":"","header_margin_bottom":40,"main_image":"shopify:\/\/shop_images\/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_6.png","image_caption":"Custom-Fit Car Covers","image_button_label":"Shop Now","button_link":"shopify:\/\/products\/car-cover","heading":"FLOOR MATS THAT GRIP AND LAST","heading_size":"h2","heading_alignment_mobile":"center","layout":"image_left","container":"container-fluid","color_scheme":"","padding_top":16,"padding_bottom":0}},"icon_box_G8J4jc":{"type":"icon-box","blocks":{"iconbox_hAPtf4":{"type":"iconbox","settings":{"card_color_scheme":"footer","image":"shopify:\/\/shop_images\/fast-delivery.avif","image_by_url":"","title":"30-Day Free Returns","description":"<p>Return Label Included<\/p>","link":"","button_label":"","button_link":"","button_style":"m-button--link","button_size":""}},"iconbox_igndpc":{"type":"iconbox","settings":{"card_color_scheme":"footer","image":"shopify:\/\/shop_images\/security.avif","image_by_url":"","title":"10-Year Warranty","description":"<p>Quality You Can Trust<\/p>","link":"","button_label":"","button_link":"","button_style":"m-button--link","button_size":""}},"iconbox_iH3i9y":{"type":"iconbox","settings":{"card_color_scheme":"footer","image":"shopify:\/\/shop_images\/fast-delivery.avif","image_by_url":"","title":"Same-Day Free Shipping","description":"<p>All Orders Over $50<\/p>","link":"","button_label":"","button_link":"","button_style":"m-button--link","button_size":""}},"iconbox_VHnaUV":{"type":"iconbox","settings":{"card_color_scheme":"footer","image":"shopify:\/\/shop_images\/car-seat.avif","image_by_url":"","title":"Secure Shopping","description":"<p>Protection Against Fraud<\/p>","link":"","button_label":"","button_link":"","button_style":"m-button--link","button_size":""}}},"block_order":["iconbox_hAPtf4","iconbox_igndpc","iconbox_iH3i9y","iconbox_VHnaUV"],"name":"Featured promotion","settings":{"container":"container-fluid","color_scheme":"footer","heading":"BUY WITH CONFIDENCE","heading_size":"h2","subheading":"","description":"","header_alignment":"center","item_per_row":4,"item_gap":30,"item_gap_mobile":10,"card_style":"vertical","image_max_width":"70px","content_alignment":"center","hover_effect":"scaling-up","enable_slider":false,"show_pagination":false,"show_navigation":false,"use_scroll_mobile":false,"use_grid_column_mb":true,"padding_top":16,"padding_bottom":20,"custom_class":"","animations":"inherit"}},"lab_tested_slider_BT6zKF":{"type":"lab-tested-slider","blocks":{"video_slide_CMEfVM":{"type":"video_slide","settings":{"hosted_video":"shopify:\/\/files\/videos\/16032026_16_9.mp4","autoplay_video":true,"loop_video":true,"title":"Installation Guide Seat Covers","title_color":"#ffffff","text":"Wellfit designer leather car seats cover full set universal car seat covers full set luxury","text_color":"#e0e0e0","btn_label":"Shop Seat Covers","btn_link":"","btn_text":"#000000","btn_bg":"#ffffff","btn_border":"#ffffff","btn_text_hover":"#000000","btn_bg_hover":"#e6e6e6","btn_border_hover":"#e6e6e6"}},"image_slide_N3DcHH":{"type":"image_slide","settings":{"image":"shopify:\/\/shop_images\/Screenshot_2026-03-15_at_00.52.17.png","title":"Thoroughly Tested Car Covers","title_color":"#ffffff","text":"At Royal Auto we have tested our Car Covers against the elements! Royal Auto's Car Covers are of the highest quality.","text_color":"#e0e0e0","btn_label":"Download the Report","btn_link":"","btn_text":"#ffffff","btn_bg":"transparent","btn_border":"#555555","btn_text_hover":"#ffffff","btn_bg_hover":"#333333","btn_border_hover":"#777777"}}},"block_order":["video_slide_CMEfVM","image_slide_N3DcHH"],"name":"Lab Tested Slider","settings":{"container":"container-fluid","heading":"Easy installation","heading_size":"h2","heading_color":"#111111","bg_color":"#1a1a1a","show_arrows":true,"show_dots":true,"heading_margin_top":20,"padding_top":40,"padding_bottom":40}},"testimonials_kjLfBz":{"type":"testimonials","blocks":{"testimonial_DL7dLz":{"type":"testimonial","settings":{"title":"","description":"<p>Fits snug with no slipping. Exactly what I wanted.<\/p>","footer":"<p>Johnathan S.<\/p>","image_text":"","image_link":"","product":""}},"testimonial_tiMNGf":{"type":"testimonial","settings":{"title":"","description":"<p>Way better than my old seat covers. Big upgrade.<\/p>","footer":"<p>D H.<\/p>","image_text":"","image_link":"","product":""}},"testimonial_Uq9jij":{"type":"testimonial","settings":{"title":"","description":"<p>Feels like a luxury car now. Friends keep asking about it.<\/p>","footer":"<p>Mike H.<\/p>","image_text":"","image_link":"","product":""}},"testimonial_MY9PzK":{"type":"testimonial","settings":{"title":"","description":"<p>Installation was easier than expected and the result is amazing.<\/p>","footer":"<p>Larry L.<\/p>","image_text":"","image_link":"","product":""}},"testimonial_GFJAkU":{"type":"testimonial","settings":{"title":"","description":"<p>Looks very close to a custom interior once installed. Really impressed.<\/p>","footer":"<p>Azrael D.<\/p>","image_text":"","image_link":"","product":""}},"testimonial_KABbKR":{"type":"testimonial","settings":{"title":"","description":"<p>Honestly didn’t expect them to fit this well. Looks like factory-installed seats now.<\/p>","footer":"<p>Rhys D.<\/p>","image_text":"","image_link":"","product":""}},"testimonial_gP4TAP":{"type":"testimonial","settings":{"title":"","description":"<p>Took some time to install but totally worth it.<\/p>","footer":"<p>Mayuraporn Crittendon<\/p>","image_text":"","image_link":"","product":""}}},"block_order":["testimonial_DL7dLz","testimonial_tiMNGf","testimonial_Uq9jij","testimonial_MY9PzK","testimonial_GFJAkU","testimonial_KABbKR","testimonial_gP4TAP"],"name":"Testimonials","settings":{"heading":"What Over 10,000 Drivers Are Saying","heading_size":"h3","subheading":"","description":"","header_alignment":"center","container":"container","color_scheme":"default","design":"testimonials-2","show_stars":true,"autorotate":true,"show_navigation":false,"show_pagination":true,"star_color":"#e84e4e","item_color_scheme":"footer","padding_top":40,"padding_bottom":0,"custom_class":"","animations":"inherit"}},"see_in_action_PAUQDQ":{"type":"see-in-action","blocks":{"video_block_WPkn4K":{"type":"video_block","settings":{"video":"shopify:\/\/files\/videos\/2103_watermask.mp4","caption":"The seat covers\nwere pretty good."}},"video_block_jC8d6V":{"type":"video_block","settings":{"video":"shopify:\/\/files\/videos\/1903_script9_nomusic.mp4","caption":"The seat covers\nwere pretty good."}},"video_block_hNEaMK":{"type":"video_block","settings":{"video":"shopify:\/\/files\/videos\/14032026_video_1.mp4","caption":"The seat covers\nwere pretty good."}},"video_block_DrYRjG":{"type":"video_block","settings":{"video":"shopify:\/\/files\/videos\/14032026_video_2_2.mp4","caption":"The seat covers\nwere pretty good."}},"video_block_T6UQax":{"type":"video_block","settings":{"video":"shopify:\/\/files\/videos\/2403_Rav_2024.mp4","caption":"The seat covers\nwere pretty good."}},"video_block_8kzyeE":{"type":"video_block","settings":{"video":"shopify:\/\/files\/videos\/2403_blackgrey_honda_civic_2024.mp4","caption":"The seat covers\nwere pretty good."}}},"block_order":["video_block_WPkn4K","video_block_jC8d6V","video_block_hNEaMK","video_block_DrYRjG","video_block_T6UQax","video_block_8kzyeE"],"name":"See In Action","settings":{"container":"container-fluid","heading":"SEE IN ACTION","heading_color":"#111111","subheading":"Simple installs, real protection, and honest feedback — all caught on video.","subheading_color":"#666666","bg_color":"#f0f0f0","padding_top":12,"padding_bottom":0}},"image_with_text_2_brWXDK":{"type":"image-with-text-2","name":"Image with text overlay","settings":{"section_bg":"#ffffff","color_scheme":"scheme-cee058e4-58e3-46aa-9af9-219dadc79066","container":"w-full","hero_size":"medium","show_overlay":false,"image":"shopify:\/\/shop_images\/IMG_3826.jpg","image_link":"","parallax":false,"parallax_direction":"vertical","show_content_box":true,"content_in_container":false,"content_position":"left bottom","text_alignment":"left","text_size":"medium","text_color":"white","title":"Ready for a Perfect Fit?","subtitle":"","text":"<p>At Royal Auto, we understand that you want the best for your vehicle. Our custom covers offer the premium quality.<\/p><p><\/p>","button_label":"Find your Custom-Fit Today","button_link":"","button_style":"m-button--primary","button_size":"","padding_top_mobile":0,"padding_bottom_mobile":0,"text_alignment_mobile":"left","use_content_above":true,"custom_class":"","animations":"inherit","enable_bg_zoom_effect":false,"enable_preload_image":false}},"custom_content_AiKiqW":{"type":"custom-content","blocks":{"text_J9g6Qy":{"type":"text","settings":{"title":"Transform Your Interior Into Luxury — Without Paying $2,000+","subheading":"BEFORE AND AFTER","text":"<p>Premium Nappa Leather. Tailored Fit. Built for Real Life.<\/p><p>No sliding. No wrinkles. No cheap feel.<\/p><p>🔥 Upgrade Your Seats Today<\/p>","width":"33%","alignment":"center","align_text":"left","text_size":"medium","text_color":"inherit","button_label":"","button_link":"","button_style":"m-button--primary","button_size":"","block_custom_class":"","animations":"inherit"}},"image_comparison_eU7KbG":{"type":"image_comparison","settings":{"width":"66%","product":"","subtitle":"","title":"","text":"","text_size":"medium","content_alignment":"left","text_color":"black","layout":"horizontal","image_height":"medium","before_image":"shopify:\/\/shop_images\/426831074_788951829933589_5271841682254174829_n.webp","before_image_mobile":"shopify:\/\/shop_images\/IMG_8246.heic","before_heading":"","after_image":"shopify:\/\/shop_images\/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_10.png","after_image_mobile":"shopify:\/\/shop_images\/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_9.png","after_heading":"","block_custom_class":"","animations":"inherit"}}},"block_order":["text_J9g6Qy","image_comparison_eU7KbG"],"name":"Custom content","settings":{"heading":"","heading_size":"h3","subheading":"","description":"","header_alignment":"center","container":"container","color_scheme":"","content_color_scheme":"","enable_parallax":false,"parallax_direction":"vertical","gap":5,"gap_mobile":16,"use_scroll_mobile":false,"padding_top":50,"padding_bottom":50,"enable_preload_image":false,"custom_class":""}}},"order":["promo_banner_qcf7GD","1621243260e1af0c20","vehicle_finder_tqC8XM","category_cards_i6UBRp","image_with_feature_list_jPjfPR","image_with_feature_list_daVdej","image_with_feature_list_ayrFfF","icon_box_G8J4jc","lab_tested_slider_BT6zKF","testimonials_kjLfBz","see_in_action_PAUQDQ","image_with_text_2_brWXDK","custom_content_AiKiqW"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "promo_banner_qcf7GD": {
+      "type": "promo-banner",
+      "name": "Promo Banner",
+      "settings": {
+        "image": "shopify://shop_images/leaderbannerdesktop-ezgif.com-png-to-webp-converter.webp",
+        "image_mobile": "shopify://shop_images/leaderbannermobileresize.webp",
+        "banner_link": "",
+        "image_height": 100,
+        "image_height_mobile": 50,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "1621243260e1af0c20": {
+      "type": "slider",
+      "blocks": {
+        "1621243260e1af0c20-0": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/1a73eef671b2f0eca9a3.jpg",
+            "mb_background": "shopify://shop_images/BannerMobileRoyalAuto.webp",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "Shop Now",
+            "footer_link": "",
+            "enable_preload_image": true
+          }
+        },
+        "slider_item_4TJeXU": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/3.png",
+            "mb_background": "shopify://shop_images/3.png",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "sf__btn-secondary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": true,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "Shop Now",
+            "footer_link": "",
+            "enable_preload_image": true
+          }
+        }
+      },
+      "block_order": [
+        "1621243260e1af0c20-0",
+        "slider_item_4TJeXU"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "light",
+        "show_dots": false,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 2,
+        "use_content_above": true,
+        "custom_class": "sf-home__slideshow",
+        "animations": "inherit"
+      }
+    },
+    "vehicle_finder_tqC8XM": {
+      "type": "vehicle-finder",
+      "name": "Vehicle Finder",
+      "settings": {
+        "heading": "SELECT YOUR VEHICLE",
+        "bg_color": "#111111",
+        "text_color": "#ffffff",
+        "button_color": "#b22222",
+        "button_text_color": "#ffffff",
+        "button_text": "GO"
+      }
+    },
+    "category_cards_i6UBRp": {
+      "type": "category-cards",
+      "blocks": {
+        "card_r86TwY": {
+          "type": "card",
+          "settings": {
+            "title": "Seat Covers",
+            "subtitle": "Front Seat / 👉 Full Set (5 Seater) 🔥",
+            "image": "shopify://shop_images/Thi_t_k_ch_a_co_ten_7.png",
+            "link": "shopify://products/luxury-nappa-leather-seat-covers-tailored-fit-for-cars-suvs-trucks"
+          }
+        },
+        "card_UbEN4U": {
+          "type": "card",
+          "settings": {
+            "title": "Car Covers",
+            "subtitle": "Car / SUV / Truck",
+            "image": "shopify://shop_images/car-cover-home-icon.webp",
+            "link": "shopify://products/car-cover"
+          }
+        },
+        "card_ac98Ch": {
+          "type": "card",
+          "settings": {
+            "title": "Floor Mats",
+            "subtitle": "Car / SUV / Truck",
+            "image": "shopify://shop_images/Thi_t_k_ch_a_co_ten_8.png",
+            "link": "shopify://products/floor-mats"
+          }
+        }
+      },
+      "block_order": [
+        "card_r86TwY",
+        "card_UbEN4U",
+        "card_ac98Ch"
+      ],
+      "name": "Category Cards",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "image_size": 360
+      }
+    },
+    "image_with_feature_list_jPjfPR": {
+      "type": "image-with-feature-list",
+      "blocks": {
+        "feature_item_CLQiyL": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Custom-Fit Design",
+            "text": "Tailored for your exact vehicle."
+          }
+        },
+        "feature_item_mD4WxY": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Ride in Comfort",
+            "text": "Premium memory foam and built in lumbar support."
+          }
+        },
+        "feature_item_DyGeHj": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Spill & Scratch Protection",
+            "text": "Guards from pets, spills, dirt, and everyday life."
+          }
+        },
+        "feature_item_gpT99V": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Easy DIY Install",
+            "text": "Tool-free and hassle-free installation."
+          }
+        }
+      },
+      "block_order": [
+        "feature_item_CLQiyL",
+        "feature_item_mD4WxY",
+        "feature_item_DyGeHj",
+        "feature_item_gpT99V"
+      ],
+      "name": "Image with Feature List",
+      "settings": {
+        "top_subheading": "Tailored. Tested. Trusted.",
+        "top_heading": "WHY ROYAL AUTO?",
+        "header_margin_bottom": 40,
+        "main_image": "shopify://shop_images/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_9.png",
+        "image_caption": "Custom-Fit Seat Covers",
+        "image_button_label": "Shop Now",
+        "button_link": "shopify://products/car-cover",
+        "heading": "SEAT COVERS THAT FIT AND STAY.",
+        "heading_size": "h2",
+        "heading_alignment_mobile": "center",
+        "layout": "image_left",
+        "container": "container-fluid",
+        "color_scheme": "scheme-cee058e4-58e3-46aa-9af9-219dadc79066",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_feature_list_daVdej": {
+      "type": "image-with-feature-list",
+      "blocks": {
+        "feature_item_XcKqJh": {
+          "type": "feature_item",
+          "settings": {
+            "title": "All-Weather Protection",
+            "text": "Rain. Sun. Dust. Covered."
+          }
+        },
+        "feature_item_7AGHEY": {
+          "type": "feature_item",
+          "settings": {
+            "title": "100% Waterproof",
+            "text": "eeps your car bone-dry."
+          }
+        },
+        "feature_item_HtgkPn": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Paint-Safe Lining",
+            "text": "Soft inside. No scratches."
+          }
+        },
+        "feature_item_tDDgzg": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Snug, Model-Specific Fit",
+            "text": "Made for your Vehicle. Perfect fit."
+          }
+        }
+      },
+      "block_order": [
+        "feature_item_XcKqJh",
+        "feature_item_7AGHEY",
+        "feature_item_HtgkPn",
+        "feature_item_tDDgzg"
+      ],
+      "name": "Image with Feature List",
+      "settings": {
+        "top_subheading": "",
+        "top_heading": "",
+        "header_margin_bottom": 40,
+        "main_image": "shopify://shop_images/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_5.png",
+        "image_caption": "Custom-Fit Car Covers",
+        "image_button_label": "Shop Now",
+        "button_link": "shopify://products/car-cover",
+        "heading": "CAR COVERS THAT ACTUALLY PROTECT",
+        "heading_size": "h2",
+        "heading_alignment_mobile": "center",
+        "layout": "image_right",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_feature_list_ayrFfF": {
+      "type": "image-with-feature-list",
+      "blocks": {
+        "feature_item_GFzB6w": {
+          "type": "feature_item",
+          "settings": {
+            "title": "3D-Scanned Precision Fit",
+            "text": "Engineered to hug every curve and corner of your vehicle."
+          }
+        },
+        "feature_item_GTaJLa": {
+          "type": "feature_item",
+          "settings": {
+            "title": "All-Season Protection",
+            "text": "Rain, snow, mud, or spills - these mats don't flinch."
+          }
+        },
+        "feature_item_qU8hC8": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Stay-Put Durability",
+            "text": "Textured grip. Locked in. Scratch-proof."
+          }
+        },
+        "feature_item_xEmFeU": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Easy to Clean. Easier to Maintain.",
+            "text": "Quick wipe or vacuum. No buildup, good as new."
+          }
+        }
+      },
+      "block_order": [
+        "feature_item_GFzB6w",
+        "feature_item_GTaJLa",
+        "feature_item_qU8hC8",
+        "feature_item_xEmFeU"
+      ],
+      "name": "Image with Feature List",
+      "settings": {
+        "top_subheading": "",
+        "top_heading": "",
+        "header_margin_bottom": 40,
+        "main_image": "shopify://shop_images/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_6.png",
+        "image_caption": "Custom-Fit Car Covers",
+        "image_button_label": "Shop Now",
+        "button_link": "shopify://products/car-cover",
+        "heading": "FLOOR MATS THAT GRIP AND LAST",
+        "heading_size": "h2",
+        "heading_alignment_mobile": "center",
+        "layout": "image_left",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "icon_box_G8J4jc": {
+      "type": "icon-box",
+      "blocks": {
+        "iconbox_hAPtf4": {
+          "type": "iconbox",
+          "settings": {
+            "card_color_scheme": "footer",
+            "image": "shopify://shop_images/fast-delivery.avif",
+            "image_by_url": "",
+            "title": "30-Day Free Returns",
+            "description": "<p>Return Label Included</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_igndpc": {
+          "type": "iconbox",
+          "settings": {
+            "card_color_scheme": "footer",
+            "image": "shopify://shop_images/security.avif",
+            "image_by_url": "",
+            "title": "10-Year Warranty",
+            "description": "<p>Quality You Can Trust</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_iH3i9y": {
+          "type": "iconbox",
+          "settings": {
+            "card_color_scheme": "footer",
+            "image": "shopify://shop_images/fast-delivery.avif",
+            "image_by_url": "",
+            "title": "Same-Day Free Shipping",
+            "description": "<p>All Orders Over $50</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_VHnaUV": {
+          "type": "iconbox",
+          "settings": {
+            "card_color_scheme": "footer",
+            "image": "shopify://shop_images/car-seat.avif",
+            "image_by_url": "",
+            "title": "Secure Shopping",
+            "description": "<p>Protection Against Fraud</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "iconbox_hAPtf4",
+        "iconbox_igndpc",
+        "iconbox_iH3i9y",
+        "iconbox_VHnaUV"
+      ],
+      "name": "Featured promotion",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "footer",
+        "heading": "BUY WITH CONFIDENCE",
+        "heading_size": "h2",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "vertical",
+        "image_max_width": "70px",
+        "content_alignment": "center",
+        "hover_effect": "scaling-up",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": true,
+        "padding_top": 16,
+        "padding_bottom": 20,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "lab_tested_slider_BT6zKF": {
+      "type": "lab-tested-slider",
+      "blocks": {
+        "video_slide_CMEfVM": {
+          "type": "video_slide",
+          "settings": {
+            "hosted_video": "shopify://files/videos/16032026_16_9.mp4",
+            "autoplay_video": true,
+            "loop_video": true,
+            "title": "Installation Guide Seat Covers",
+            "title_color": "#ffffff",
+            "text": "Wellfit designer leather car seats cover full set universal car seat covers full set luxury",
+            "text_color": "#e0e0e0",
+            "btn_label": "Shop Seat Covers",
+            "btn_link": "",
+            "btn_text": "#000000",
+            "btn_bg": "#ffffff",
+            "btn_border": "#ffffff",
+            "btn_text_hover": "#000000",
+            "btn_bg_hover": "#e6e6e6",
+            "btn_border_hover": "#e6e6e6"
+          }
+        },
+        "image_slide_N3DcHH": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-03-15_at_00.52.17.png",
+            "title": "Thoroughly Tested Car Covers",
+            "title_color": "#ffffff",
+            "text": "At Royal Auto we have tested our Car Covers against the elements! Royal Auto's Car Covers are of the highest quality.",
+            "text_color": "#e0e0e0",
+            "btn_label": "Download the Report",
+            "btn_link": "",
+            "btn_text": "#ffffff",
+            "btn_bg": "transparent",
+            "btn_border": "#555555",
+            "btn_text_hover": "#ffffff",
+            "btn_bg_hover": "#333333",
+            "btn_border_hover": "#777777"
+          }
+        }
+      },
+      "block_order": [
+        "video_slide_CMEfVM",
+        "image_slide_N3DcHH"
+      ],
+      "name": "Lab Tested Slider",
+      "settings": {
+        "container": "container-fluid",
+        "heading": "Easy installation",
+        "heading_size": "h2",
+        "heading_color": "#111111",
+        "bg_color": "#1a1a1a",
+        "show_arrows": true,
+        "show_dots": true,
+        "heading_margin_top": 20,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "testimonials_kjLfBz": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_DL7dLz": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Fits snug with no slipping. Exactly what I wanted.</p>",
+            "footer": "<p>Johnathan S.</p>",
+            "image_text": "",
+            "image_link": "",
+            "product": ""
+          }
+        },
+        "testimonial_tiMNGf": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Way better than my old seat covers. Big upgrade.</p>",
+            "footer": "<p>D H.</p>",
+            "image_text": "",
+            "image_link": "",
+            "product": ""
+          }
+        },
+        "testimonial_Uq9jij": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Feels like a luxury car now. Friends keep asking about it.</p>",
+            "footer": "<p>Mike H.</p>",
+            "image_text": "",
+            "image_link": "",
+            "product": ""
+          }
+        },
+        "testimonial_MY9PzK": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Installation was easier than expected and the result is amazing.</p>",
+            "footer": "<p>Larry L.</p>",
+            "image_text": "",
+            "image_link": "",
+            "product": ""
+          }
+        },
+        "testimonial_GFJAkU": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Looks very close to a custom interior once installed. Really impressed.</p>",
+            "footer": "<p>Azrael D.</p>",
+            "image_text": "",
+            "image_link": "",
+            "product": ""
+          }
+        },
+        "testimonial_KABbKR": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Honestly didn’t expect them to fit this well. Looks like factory-installed seats now.</p>",
+            "footer": "<p>Rhys D.</p>",
+            "image_text": "",
+            "image_link": "",
+            "product": ""
+          }
+        },
+        "testimonial_gP4TAP": {
+          "type": "testimonial",
+          "settings": {
+            "title": "",
+            "description": "<p>Took some time to install but totally worth it.</p>",
+            "footer": "<p>Mayuraporn Crittendon</p>",
+            "image_text": "",
+            "image_link": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_DL7dLz",
+        "testimonial_tiMNGf",
+        "testimonial_Uq9jij",
+        "testimonial_MY9PzK",
+        "testimonial_GFJAkU",
+        "testimonial_KABbKR",
+        "testimonial_gP4TAP"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "heading": "What Over 10,000 Drivers Are Saying",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "color_scheme": "default",
+        "design": "testimonials-2",
+        "show_stars": true,
+        "autorotate": true,
+        "show_navigation": false,
+        "show_pagination": true,
+        "star_color": "#e84e4e",
+        "item_color_scheme": "footer",
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "see_in_action_PAUQDQ": {
+      "type": "see-in-action",
+      "blocks": {
+        "video_block_WPkn4K": {
+          "type": "video_block",
+          "settings": {
+            "video": "shopify://files/videos/2103_watermask.mp4",
+            "caption": "The seat covers\nwere pretty good."
+          }
+        },
+        "video_block_jC8d6V": {
+          "type": "video_block",
+          "settings": {
+            "video": "shopify://files/videos/1903_script9_nomusic.mp4",
+            "caption": "The seat covers\nwere pretty good."
+          }
+        },
+        "video_block_hNEaMK": {
+          "type": "video_block",
+          "settings": {
+            "video": "shopify://files/videos/14032026_video_1.mp4",
+            "caption": "The seat covers\nwere pretty good."
+          }
+        },
+        "video_block_DrYRjG": {
+          "type": "video_block",
+          "settings": {
+            "video": "shopify://files/videos/14032026_video_2_2.mp4",
+            "caption": "The seat covers\nwere pretty good."
+          }
+        },
+        "video_block_T6UQax": {
+          "type": "video_block",
+          "settings": {
+            "video": "shopify://files/videos/2403_Rav_2024.mp4",
+            "caption": "The seat covers\nwere pretty good."
+          }
+        },
+        "video_block_8kzyeE": {
+          "type": "video_block",
+          "settings": {
+            "video": "shopify://files/videos/2403_blackgrey_honda_civic_2024.mp4",
+            "caption": "The seat covers\nwere pretty good."
+          }
+        }
+      },
+      "block_order": [
+        "video_block_WPkn4K",
+        "video_block_jC8d6V",
+        "video_block_hNEaMK",
+        "video_block_DrYRjG",
+        "video_block_T6UQax",
+        "video_block_8kzyeE"
+      ],
+      "name": "See In Action",
+      "settings": {
+        "container": "container-fluid",
+        "heading": "SEE IN ACTION",
+        "heading_color": "#111111",
+        "subheading": "Simple installs, real protection, and honest feedback — all caught on video.",
+        "subheading_color": "#666666",
+        "bg_color": "#f0f0f0",
+        "padding_top": 12,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_text_2_brWXDK": {
+      "type": "image-with-text-2",
+      "name": "Image with text overlay",
+      "settings": {
+        "section_bg": "#ffffff",
+        "color_scheme": "scheme-cee058e4-58e3-46aa-9af9-219dadc79066",
+        "container": "w-full",
+        "hero_size": "medium",
+        "show_overlay": false,
+        "image": "shopify://shop_images/IMG_3826.jpg",
+        "image_link": "",
+        "parallax": false,
+        "parallax_direction": "vertical",
+        "show_content_box": true,
+        "content_in_container": false,
+        "content_position": "left bottom",
+        "text_alignment": "left",
+        "text_size": "medium",
+        "text_color": "white",
+        "title": "Ready for a Perfect Fit?",
+        "subtitle": "",
+        "text": "<p>At Royal Auto, we understand that you want the best for your vehicle. Our custom covers offer the premium quality.</p><p></p>",
+        "button_label": "Find your Custom-Fit Today",
+        "button_link": "",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "text_alignment_mobile": "left",
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit",
+        "enable_bg_zoom_effect": false,
+        "enable_preload_image": false
+      }
+    },
+    "custom_content_AiKiqW": {
+      "type": "custom-content",
+      "blocks": {
+        "text_J9g6Qy": {
+          "type": "text",
+          "settings": {
+            "title": "Transform Your Interior Into Luxury — Without Paying $2,000+",
+            "subheading": "BEFORE AND AFTER",
+            "text": "<p>Premium Nappa Leather. Tailored Fit. Built for Real Life.</p><p>No sliding. No wrinkles. No cheap feel.</p><p>🔥 Upgrade Your Seats Today</p>",
+            "width": "33%",
+            "alignment": "center",
+            "align_text": "left",
+            "text_size": "medium",
+            "text_color": "inherit",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        },
+        "image_comparison_eU7KbG": {
+          "type": "image_comparison",
+          "settings": {
+            "width": "66%",
+            "product": "",
+            "subtitle": "",
+            "title": "",
+            "text": "",
+            "text_size": "medium",
+            "content_alignment": "left",
+            "text_color": "black",
+            "layout": "horizontal",
+            "image_height": "medium",
+            "before_image": "shopify://shop_images/426831074_788951829933589_5271841682254174829_n.webp",
+            "before_image_mobile": "shopify://shop_images/IMG_8246.heic",
+            "before_heading": "",
+            "after_image": "shopify://shop_images/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_10.png",
+            "after_image_mobile": "shopify://shop_images/Premium_Waterproof_Nappa_Leather_Car_Seat_Covers_Full_Set_Universal_Fit_for_Most_Cars_SUVs_Trucks_9.png",
+            "after_heading": "",
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        }
+      },
+      "block_order": [
+        "text_J9g6Qy",
+        "image_comparison_eU7KbG"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "color_scheme": "",
+        "content_color_scheme": "",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "gap": 5,
+        "gap_mobile": 16,
+        "use_scroll_mobile": false,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "enable_preload_image": false,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "promo_banner_qcf7GD",
+    "1621243260e1af0c20",
+    "vehicle_finder_tqC8XM",
+    "category_cards_i6UBRp",
+    "image_with_feature_list_jPjfPR",
+    "image_with_feature_list_daVdej",
+    "image_with_feature_list_ayrFfF",
+    "icon_box_G8J4jc",
+    "lab_tested_slider_BT6zKF",
+    "testimonials_kjLfBz",
+    "see_in_action_PAUQDQ",
+    "image_with_text_2_brWXDK",
+    "custom_content_AiKiqW"
+  ]
+}
