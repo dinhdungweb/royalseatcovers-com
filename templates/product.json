@@ -38,6 +38,7 @@
       "blocks": {
         "variant_picker": {
           "type": "variant_picker",
+          "disabled": true,
           "settings": {
             "size_title": "Size"
           }
@@ -379,6 +380,20 @@
         "padding_bottom": 38,
         "enable_preload_image": false,
         "custom_class": ""
+      }
+    },
+    "product_color_remote_BATQpW": {
+      "type": "product-color-remote",
+      "name": "Remote Color Picker",
+      "settings": {
+        "title": "Choose Your Color",
+        "product": "",
+        "alignment": "left",
+        "bg_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_left": 20,
+        "padding_right": 20
       }
     },
     "custom_content_yGiY4L": {
@@ -1423,6 +1438,7 @@
   "order": [
     "promo_banner_DwK7eb",
     "breadcrumb",
+    "product_color_remote_BATQpW",
     "main",
     "custom_content_wfxaCb",
     "custom_content_yGiY4L",
