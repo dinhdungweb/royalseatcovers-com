@@ -522,39 +522,7 @@
             opacity: 1 !important;
             pointer-events: auto !important;
           }
-          .stepper-item.completed .stepper-number {
-            background: #222 !important;
-            color: #fff !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
           .stepper-marker {
-            display: none;
-          }
-          .stepper-number {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-            background: #fff;
-            z-index: 2;
-          }
-          .stepper-line {
-            width: 2px;
-            flex-grow: 1;
-            background: #eee;
-            margin: 4px 0;
-          }
-          .stepper-item.completed .stepper-line {
-            background: #222;
-          }
-          .stepper-item:last-child .stepper-line {
             display: none;
           }
           .stepper-content {
@@ -637,10 +605,7 @@
           <div class="stepper-container">
             <!-- Step 1: Vehicle Details -->
             <div class="stepper-item active" id="step-1-container">
-              <div class="stepper-marker">
-                <div class="stepper-number">1</div>
-                <div class="stepper-line"></div>
-              </div>
+
               <div class="stepper-content">
                 <h3 class="stepper-title">1. Vehicle Details</h3>
                 <div class="stepper-pane">
@@ -662,10 +627,7 @@
             >
               <!-- Step 2: Color Selection -->
               <div class="stepper-item" id="step-2-container">
-                <div class="stepper-marker">
-                  <div class="stepper-number">2</div>
-                  <div class="stepper-line"></div>
-                </div>
+
                 <div class="stepper-content">
                   <h3 class="stepper-title">2. Color - <span id="selected-color-name">{{ product.selected_or_first_available_variant.options[0] }}</span></h3>
                   <div class="stepper-pane">
@@ -676,10 +638,7 @@
 
               <!-- Step 3: Choose Your Setup -->
               <div class="stepper-item" id="step-3-container">
-                <div class="stepper-marker">
-                  <div class="stepper-number">3</div>
-                  <div class="stepper-line"></div>
-                </div>
+
                 <div class="stepper-content">
                   <h3 class="stepper-title">3. Choose Your Setup</h3>
                   <div class="stepper-pane">
@@ -1845,7 +1804,7 @@
       targetSelect.disabled = !matchFound;
     }
 
-    function validateAndSyncSteps(autoScroll = false) {
+    function validateAndSyncSteps() {
       const vehicleDone = yearSelect.value && makeSelect.value && modelSelect.value && trimSelect.value && cabSelect.value;
       const colorPicker = document.querySelector('.product-color-picker');
       const setupPicker = document.querySelector('.product-setup-picker');
@@ -1907,7 +1866,7 @@
       initSelect(cabSelect, 'Select Cab Size');
       if (trimWrapper) trimWrapper.style.display = 'none';
       if (cabWrapper) cabWrapper.style.display = 'none';
-      validateAndSyncSteps(true);
+      validateAndSyncSteps();
     });
 
     makeSelect.addEventListener('change', function() {
@@ -1916,7 +1875,7 @@
       initSelect(cabSelect, 'Select Cab Size');
       if (trimWrapper) trimWrapper.style.display = 'none';
       if (cabWrapper) cabWrapper.style.display = 'none';
-      validateAndSyncSteps(true);
+      validateAndSyncSteps();
     });
 
     modelSelect.addEventListener('change', function() {
@@ -1928,7 +1887,7 @@
         if (trimWrapper) trimWrapper.style.display = 'none';
       }
       if (cabWrapper) cabWrapper.style.display = 'none';
-      validateAndSyncSteps(true);
+      validateAndSyncSteps();
     });
 
     trimSelect.addEventListener('change', function() {
@@ -1938,10 +1897,10 @@
       } else {
         if (cabWrapper) cabWrapper.style.display = 'none';
       }
-      validateAndSyncSteps(true);
+      validateAndSyncSteps();
     });
 
-    cabSelect.addEventListener('change', () => validateAndSyncSteps(true));
+    cabSelect.addEventListener('change', () => validateAndSyncSteps());
 
     // Listen for Color and Setup changes
     document.addEventListener('change', function(e) {
