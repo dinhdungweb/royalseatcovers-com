@@ -76,9 +76,22 @@
   }
   
   @media (max-width: 768px) {
+    .m-remote-color-picker__swatches {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 5px;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+    }
+    .m-remote-color-picker__swatches::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
     .m-remote-color-swatch {
       width: 60px;
       height: 60px;
+      flex: 0 0 auto;
     }
   }
 </style>
