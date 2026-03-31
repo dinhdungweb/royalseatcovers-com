@@ -59,7 +59,7 @@
       <option value="">Select Cab Size</option>
       {% paginate shop.metaobjects.cab.values by 2000 %}
         {% for cab in shop.metaobjects.cab.values %}
-          <option value="{{ cab.cab }}" data-trim="{{ cab.trim.value.trim }}">{{ cab.cab }}</option>
+          <option value="{{ cab.cab }}" data-trim="{{ cab.trim.value.trim }}" data-model="{{ cab.trim.value.model.value.model }}">{{ cab.cab }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>
