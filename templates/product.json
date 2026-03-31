@@ -296,6 +296,18 @@
     "custom_content_U7yk9C": {
       "type": "custom-content",
       "blocks": {
+        "image_FYjdCT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/familygeminigreyseat-ezgif.com-resize.webp",
+            "link": "",
+            "width": "50%",
+            "alignment": "center",
+            "block_custom_class": "",
+            "animations": "inherit",
+            "enable_preload_image": false
+          }
+        },
         "text_netRQe": {
           "type": "text",
           "settings": {
@@ -317,6 +329,7 @@
         }
       },
       "block_order": [
+        "image_FYjdCT",
         "text_netRQe"
       ],
       "name": "Custom content",
