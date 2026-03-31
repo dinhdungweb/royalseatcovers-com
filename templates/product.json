@@ -124,37 +124,6 @@
             "custom_liquid": "<div class=\"shipping-countdown\">\n  Order within <span id=\"countdown\">--:--:--</span> 🚚 Free Shipping — Limited Time\n</div>\n\n<style>\n.shipping-countdown{\n  color:#c62828;\n  font-weight:600;\n  font-size:18px;\n}\n</style>\n\n<script>\n(function(){\n\n  const cutoffHour = 1; // giờ cutoff (23 = 11PM)\n  const countdownEl = document.getElementById(\"countdown\");\n\n  function getCutoff(){\n    const now = new Date();\n    const cutoff = new Date();\n\n    cutoff.setHours(cutoffHour,0,0,0);\n\n    if(now > cutoff){\n      cutoff.setDate(cutoff.getDate()+1);\n    }\n\n    return cutoff;\n  }\n\n  let cutoff = getCutoff();\n\n  function updateCountdown(){\n\n    const now = new Date();\n    let diff = cutoff - now;\n\n    if(diff <= 0){\n      cutoff = getCutoff();\n      diff = cutoff - now;\n    }\n\n    const hours = Math.floor(diff/(1000*60*60));\n    const minutes = Math.floor((diff%(1000*60*60))/(1000*60));\n    const seconds = Math.floor((diff%(1000*60))/1000);\n\n    countdownEl.textContent =\n      String(hours).padStart(2,\"0\")+\":\"+\n      String(minutes).padStart(2,\"0\")+\":\"+\n      String(seconds).padStart(2,\"0\");\n  }\n\n  updateCountdown();\n  setInterval(updateCountdown,1000);\n\n})();\n</script>"
           }
         },
-        "text_with_icon_a3dhMT": {
-          "type": "text_with_icon",
-          "settings": {
-            "mobile_text_size": 18,
-            "desktop_text_size": 20,
-            "alignment": "left",
-            "text_color": "#222222",
-            "text_1": "<strong>Pick Your Vehicle</strong>",
-            "text_2": "",
-            "text_3": "",
-            "icon_scale": 120,
-            "icon_color": "#121212",
-            "icon_1": "",
-            "filled_icon_1": false,
-            "icon_2": "check_circle",
-            "filled_icon_2": false,
-            "icon_3": "check_circle",
-            "filled_icon_3": false,
-            "width": "100%",
-            "direction": "vertical",
-            "column_gap": 3,
-            "enable_bg": false,
-            "bg_color": "#1a7314",
-            "corner_radius": 40,
-            "padding": 3,
-            "border_size": 0,
-            "border_color": "#3a8735",
-            "margin_top": 15,
-            "margin_bottom": 15
-          }
-        },
         "vehicle_selector_piC4X8": {
           "type": "vehicle_selector",
           "settings": {}
@@ -293,7 +262,6 @@
         "price",
         "text_with_icon_t86JmV",
         "custom_liquid_8fEJnG",
-        "text_with_icon_a3dhMT",
         "vehicle_selector_piC4X8",
         "custom_countdown_mGG63L",
         "free_included_items_NdCbfk",
