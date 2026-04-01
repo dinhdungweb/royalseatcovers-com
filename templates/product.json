@@ -14,10 +14,10 @@
       "custom_css": [],
       "name": "Promo Banner",
       "settings": {
-        "image": "shopify://shop_images/leaderbannerdesktop.webp",
+        "image": "shopify://shop_images/leaderbannerdesktop3x-ezgif.com-png-to-webp-converter.webp",
         "image_mobile": "shopify://shop_images/leaderbannerdesktop_817fbb01-4f75-4046-9f86-bfb5bfb37c65.webp",
         "banner_link": "",
-        "image_height": 120,
+        "image_height": 200,
         "image_height_mobile": 40,
         "padding_top": 0,
         "padding_bottom": 0
