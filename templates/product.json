@@ -310,6 +310,7 @@
       "block_order": [
         "easysearch_ymm_easysearch_widget_GPVWy7"
       ],
+      "disabled": true,
       "settings": {
         "heading": "",
         "heading_size": "h3",
