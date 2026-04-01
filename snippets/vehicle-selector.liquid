@@ -19,13 +19,11 @@
     <label>Make</label>
     <select name="properties[Make]" id="vehicle-make" form="{{ product_form_id }}" required disabled>
       <option value="">Select Make</option>
-      {% paginate shop.metaobjects.year.values by 300 %}
-        {% for yr_obj in shop.metaobjects.year.values %}
-          {% for mk_obj in yr_obj.make.value %}
-            <option value="{{ mk_obj.make }}" data-year="{{ yr_obj.year }}">
-              {{ mk_obj.make }}
-            </option>
-          {% endfor %}
+      {% paginate shop.metaobjects.make.values by 1000 %}
+        {% for make_obj in shop.metaobjects.make.values %}
+          <option value="{{ make_obj.make }}" data-year="{{ make_obj.year.value.year }}">
+            {{ make_obj.make }}
+          </option>
         {% endfor %}
       {% endpaginate %}
     </select>
@@ -35,9 +33,9 @@
     <label>Model</label>
     <select name="properties[Model]" id="vehicle-model" form="{{ product_form_id }}" required disabled>
       <option value="">Select Model</option>
-      {% paginate shop.metaobjects.model.values by 1200 %}
-        {% for model in shop.metaobjects.model.values %}
-          <option value="{{ model.model }}" data-make="{{ model.make.value.make }}">{{ model.model }}</option>
+      {% paginate shop.metaobjects.model.values by 1500 %}
+        {% for model_obj in shop.metaobjects.model.values %}
+          <option value="{{ model_obj.model }}" data-make="{{ model_obj.make.value.make }}">{{ model_obj.model }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>
@@ -48,8 +46,8 @@
     <select name="properties[Trim]" id="vehicle-trim" form="{{ product_form_id }}" required disabled>
       <option value="">Select Trim</option>
       {% paginate shop.metaobjects.trim.values by 2000 %}
-        {% for trim in shop.metaobjects.trim.values %}
-          <option value="{{ trim.trim }}" data-model="{{ trim.model.value.model }}">{{ trim.trim }}</option>
+        {% for trim_obj in shop.metaobjects.trim.values %}
+          <option value="{{ trim_obj.trim }}" data-model="{{ trim_obj.model.value.model }}">{{ trim_obj.trim }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>
@@ -60,8 +58,8 @@
     <select name="properties[Cab Size]" id="vehicle-cab" form="{{ product_form_id }}" required disabled>
       <option value="">Select Cab Size</option>
       {% paginate shop.metaobjects.cab.values by 2000 %}
-        {% for cab in shop.metaobjects.cab.values %}
-          <option value="{{ cab.cab }}" data-model="{{ cab.trim.value.model.value.model }}" data-trim="{{ cab.trim.value.trim }}">{{ cab.cab }}</option>
+        {% for cab_obj in shop.metaobjects.cab.values %}
+          <option value="{{ cab_obj.cab }}" data-trim="{{ cab_obj.trim.value.trim }}" data-model="{{ cab_obj.trim.value.model.value.model }}">{{ cab_obj.cab }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>
