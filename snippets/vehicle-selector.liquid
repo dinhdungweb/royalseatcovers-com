@@ -35,7 +35,8 @@
       <option value="">Select Model</option>
       {% paginate shop.metaobjects.model.values by 1500 %}
         {% for model_obj in shop.metaobjects.model.values %}
-          <option value="{{ model_obj.model }}" data-make="{{ model_obj.make.value.make }}">{{ model_obj.model }}</option>
+          {% assign model_year = model_obj.make.value.year.value.year %}
+          <option value="{{ model_obj.model }}" data-make="{{ model_obj.make.value.make }}" data-year="{{ model_year }}">{{ model_obj.model }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>
@@ -47,7 +48,8 @@
       <option value="">Select Trim</option>
       {% paginate shop.metaobjects.trim.values by 2000 %}
         {% for trim_obj in shop.metaobjects.trim.values %}
-          <option value="{{ trim_obj.trim }}" data-model="{{ trim_obj.model.value.model }}">{{ trim_obj.trim }}</option>
+          {% assign trim_year = trim_obj.model.value.make.value.year.value.year %}
+          <option value="{{ trim_obj.trim }}" data-model="{{ trim_obj.model.value.model }}" data-year="{{ trim_year }}">{{ trim_obj.trim }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>
@@ -59,7 +61,8 @@
       <option value="">Select Cab Size</option>
       {% paginate shop.metaobjects.cab.values by 2000 %}
         {% for cab_obj in shop.metaobjects.cab.values %}
-          <option value="{{ cab_obj.cab }}" data-trim="{{ cab_obj.trim.value.trim }}" data-model="{{ cab_obj.trim.value.model.value.model }}">{{ cab_obj.cab }}</option>
+          {% assign cab_year = cab_obj.trim.value.model.value.make.value.year.value.year %}
+          <option value="{{ cab_obj.cab }}" data-trim="{{ cab_obj.trim.value.trim }}" data-model="{{ cab_obj.trim.value.model.value.model }}" data-year="{{ cab_year }}">{{ cab_obj.cab }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>

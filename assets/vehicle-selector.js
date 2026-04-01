@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     select.disabled = true;
   }
 
-  function updateDropdown(targetSelect, optionsArr, dataAttr, parentVal, placeholder, dataAttr2, parentVal2) {
+  function updateDropdown(targetSelect, optionsArr, filters, placeholder) {
     targetSelect.innerHTML = `<option value="">${placeholder}</option>`;
     let matchFound = false;
     const seenValues = new Set();
@@ -32,8 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (opt.value === "") return;
       
       let match = true;
-      if (dataAttr && opt.getAttribute(dataAttr) !== parentVal) match = false;
-      if (dataAttr2 && opt.getAttribute(dataAttr2) !== parentVal2) match = false;
+      for (const [attr, val] of Object.entries(filters)) {
+        if (attr && opt.getAttribute(attr) !== val) {
+          match = false;
+          break;
+        }
+      }
       
       if (match) {
         const val = opt.value.trim();
@@ -117,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   yearSelect.addEventListener('change', function() {
-    updateDropdown(makeSelect, allOptions.make, 'data-year', this.value, 'Select Make');
+    updateDropdown(makeSelect, allOptions.make, { 'data-year': this.value }, 'Select Make');
     initSelect(modelSelect, 'Select Model');
     initSelect(trimSelect, 'Select Trim');
     initSelect(cabSelect, 'Select Cab Size');
@@ -127,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   makeSelect.addEventListener('change', function() {
-    updateDropdown(modelSelect, allOptions.model, 'data-make', this.value, 'Select Model');
+    updateDropdown(modelSelect, allOptions.model, { 'data-make': this.value, 'data-year': yearSelect.value }, 'Select Model');
     initSelect(trimSelect, 'Select Trim');
     initSelect(cabSelect, 'Select Cab Size');
     if (trimWrapper) trimWrapper.style.display = 'none';
@@ -136,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   modelSelect.addEventListener('change', function() {
-    const hasTrim = updateDropdown(trimSelect, allOptions.trim, 'data-model', this.value, 'Select Trim');
+    const hasTrim = updateDropdown(trimSelect, allOptions.trim, { 'data-model': this.value, 'data-year': yearSelect.value }, 'Select Trim');
     initSelect(cabSelect, 'Select Cab Size');
     if (this.value && hasTrim) {
       if (trimWrapper) trimWrapper.style.display = 'block';
@@ -148,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   trimSelect.addEventListener('change', function() {
-    const hasCab = updateDropdown(cabSelect, allOptions.cab, 'data-trim', this.value, 'Select Cab Size', 'data-model', modelSelect.value);
+    const hasCab = updateDropdown(cabSelect, allOptions.cab, { 'data-trim': this.value, 'data-model': modelSelect.value, 'data-year': yearSelect.value }, 'Select Cab Size');
     if (this.value && hasCab) {
       if (cabWrapper) cabWrapper.style.display = 'block';
     } else {
