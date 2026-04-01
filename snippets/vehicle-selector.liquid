@@ -19,12 +19,13 @@
     <label>Make</label>
     <select name="properties[Make]" id="vehicle-make" form="{{ product_form_id }}" required disabled>
       <option value="">Select Make</option>
-      {% paginate shop.metaobjects.make.values by 600 %}
-        {% for make in shop.metaobjects.make.values %}
-          {% comment %} Giả định trường liên kết là year {% endcomment %}
-          <option value="{{ make.make }}" data-year="{{ make.year.value.year }}">
-            {{ make.make }}
-          </option>
+      {% paginate shop.metaobjects.year.values by 300 %}
+        {% for yr_obj in shop.metaobjects.year.values %}
+          {% for mk_obj in yr_obj.make.value %}
+            <option value="{{ mk_obj.make }}" data-year="{{ yr_obj.year }}">
+              {{ mk_obj.make }}
+            </option>
+          {% endfor %}
         {% endfor %}
       {% endpaginate %}
     </select>
