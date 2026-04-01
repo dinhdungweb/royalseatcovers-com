@@ -1448,49 +1448,6 @@
         "assist_note": "Our customer support services are available 7 days a week 9:00 AM to 5:30 PM PST.",
         "phone_number": "(720) - 389 -2510"
       }
-    },
-    "177501869891ac4a6f": {
-      "type": "apps",
-      "settings": {
-        "heading": "",
-        "heading_size": "h3",
-        "subheading": "",
-        "header_alignment": "center",
-        "container": "container",
-        "background_color": "",
-        "padding_top": 50,
-        "padding_bottom": 50,
-        "custom_class": ""
-      }
-    },
-    "1775018731b295aca5": {
-      "type": "apps",
-      "blocks": {
-        "easysearch_ymm_easysearch_widget_MypCYQ": {
-          "type": "shopify://apps/easysearch-ymm/blocks/easysearch-widget/6d82686b-b68a-4b5e-98e3-e07b2b53d810",
-          "settings": {
-            "show_at": "section",
-            "placement_selector": "",
-            "insert_method": "prepend",
-            "padding_top": 0,
-            "padding_bottom": 0
-          }
-        }
-      },
-      "block_order": [
-        "easysearch_ymm_easysearch_widget_MypCYQ"
-      ],
-      "settings": {
-        "heading": "",
-        "heading_size": "h3",
-        "subheading": "",
-        "header_alignment": "center",
-        "container": "container",
-        "background_color": "",
-        "padding_top": 50,
-        "padding_bottom": 50,
-        "custom_class": ""
-      }
     }
   },
   "order": [
@@ -1515,8 +1472,6 @@
     "collapsible_tabs_zdLMkX",
     "rich_text_PJ963k",
     "shipping_policy_accordion_3eX8Dq",
-    "shipping_policy_accordion_4AipWx",
-    "177501869891ac4a6f",
-    "1775018731b295aca5"
+    "shipping_policy_accordion_4AipWx"
   ]
 }
