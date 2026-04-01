@@ -21,7 +21,8 @@
       <option value="">Select Make</option>
       {% paginate shop.metaobjects.make.values by 600 %}
         {% for make in shop.metaobjects.make.values %}
-          <option value="{{ make.make }}">
+          {% comment %} Giả định trường liên kết là year {% endcomment %}
+          <option value="{{ make.make }}" data-year="{{ make.year.value.year }}">
             {{ make.make }}
           </option>
         {% endfor %}
@@ -59,7 +60,7 @@
       <option value="">Select Cab Size</option>
       {% paginate shop.metaobjects.cab.values by 2000 %}
         {% for cab in shop.metaobjects.cab.values %}
-          <option value="{{ cab.cab }}" data-trim="{{ cab.trim.value.trim }}" data-model="{{ cab.trim.value.model.value.model }}">{{ cab.cab }}</option>
+          <option value="{{ cab.cab }}" data-model="{{ cab.trim.value.model.value.model }}" data-trim="{{ cab.trim.value.trim }}">{{ cab.cab }}</option>
         {% endfor %}
       {% endpaginate %}
     </select>

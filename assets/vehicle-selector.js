@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateDropdown(targetSelect, optionsArr, dataAttr, parentVal, placeholder, dataAttr2, parentVal2) {
     targetSelect.innerHTML = `<option value="">${placeholder}</option>`;
     let matchFound = false;
+    const seenValues = new Set();
+
     optionsArr.forEach(opt => {
       if (opt.value === "") return;
       
@@ -34,8 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (dataAttr2 && opt.getAttribute(dataAttr2) !== parentVal2) match = false;
       
       if (match) {
-        targetSelect.appendChild(opt.cloneNode(true));
-        matchFound = true;
+        const val = opt.value.trim();
+        if (!seenValues.has(val)) {
+          targetSelect.appendChild(opt.cloneNode(true));
+          seenValues.add(val);
+          matchFound = true;
+        }
       }
     });
     targetSelect.disabled = !matchFound;
@@ -43,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function validateAndSyncSteps() {
-    const trimRequired = !trimSelect.disabled;
-    const cabRequired = !cabSelect.disabled;
+    const trimRequired = !trimSelect.disabled && trimSelect.options.length > 1;
+    const cabRequired = !cabSelect.disabled && cabSelect.options.length > 1;
     const vehicleDone = yearSelect.value && makeSelect.value && modelSelect.value && (!trimRequired || trimSelect.value) && (!cabRequired || cabSelect.value);
     const colorPicker = document.querySelector('.product-color-picker');
     const setupPicker = document.querySelector('.product-setup-picker');
@@ -60,30 +66,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Step 1 check
     if (vehicleDone) {
-      step1.classList.add('completed');
-      step2.classList.add('active');
+      if (step1) step1.classList.add('completed');
+      if (step2) step2.classList.add('active');
       if (validationMessage) validationMessage.style.display = 'none';
     } else {
-      step1.classList.remove('completed');
-      step2.classList.remove('active');
-      step3.classList.remove('active');
-      if (validationMessage) validationMessage.style.display = 'block';
+      if (step1) step1.classList.remove('completed');
+      if (step2) step2.classList.remove('active');
+      if (step3) step3.classList.remove('active');
+      if (validationMessage && yearSelect.value) validationMessage.style.display = 'block';
     }
 
     // Step 2 check
     if (vehicleDone && colorSelected) {
-      step2.classList.add('completed');
-      step3.classList.add('active');
+      if (step2) step2.classList.add('completed');
+      if (step3) step3.classList.add('active');
     } else {
-      step2.classList.remove('completed');
-      step3.classList.remove('active');
+      if (step2) step2.classList.remove('completed');
+      if (step3) step3.classList.remove('active');
     }
 
     // Step 3 check
     if (allDone) {
-      step3.classList.add('completed');
+      if (step3) step3.classList.add('completed');
     } else {
-      step3.classList.remove('completed');
+      if (step3) step3.classList.remove('completed');
     }
 
     const atcButtons = document.querySelectorAll('.m-add-to-cart');
@@ -95,15 +101,12 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.setAttribute('data-steps-complete', 'false');
         btn.style.opacity = '0.7';
       }
-      btn.style.cursor = 'pointer';
-      btn.disabled = false;
-      btn.style.pointerEvents = 'auto';
     });
   }
 
   function isConfigurationComplete() {
-    const trimRequired = !trimSelect.disabled;
-    const cabRequired = !cabSelect.disabled;
+    const trimRequired = !trimSelect.disabled && trimSelect.options.length > 1;
+    const cabRequired = !cabSelect.disabled && cabSelect.options.length > 1;
     const vehicleDone = yearSelect.value && makeSelect.value && modelSelect.value && (!trimRequired || trimSelect.value) && (!cabRequired || cabSelect.value);
     
     const colorPicker = document.querySelector('.product-color-picker');
@@ -114,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   yearSelect.addEventListener('change', function() {
-    updateDropdown(makeSelect, allOptions.make, null, null, 'Select Make');
+    updateDropdown(makeSelect, allOptions.make, 'data-year', this.value, 'Select Make');
     initSelect(modelSelect, 'Select Model');
     initSelect(trimSelect, 'Select Trim');
     initSelect(cabSelect, 'Select Cab Size');
